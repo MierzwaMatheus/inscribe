@@ -21,59 +21,100 @@
           "básico",
           "guia"
         ]
-      },
+      }
+    ]
+  },
+  {
+    "section": "Front InBot 1 5",
+    "order": 2,
+    "path": "/docs/2_Front_InBot_1_5",
+    "pages": [
       {
-        "title": "Guia de Instalação",
-        "path": "/docs/1_Introdução/instalacao",
-        "order": 2,
-        "description": null,
+        "title": "Componentes",
+        "path": "/docs/2_Front_InBot_1_5/components",
+        "order": 1,
+        "description": "Documentação dos componentes principais da InBot",
         "tags": null
+      },
+      {
+        "title": "Micro-Componentes",
+        "path": "/docs/2_Front_InBot_1_5/micro-components",
+        "order": 2,
+        "description": "Documentação dos microcomponentes da InBot",
+        "tags": [
+          "microcomponentes",
+          "frontend",
+          "inbot 1.5"
+        ]
       }
     ]
   },
   {
-    "section": "Guias",
+    "section": "Flows",
     "order": 3,
-    "path": "/docs/3_Guias",
+    "path": "/docs/3_Flows",
     "pages": [
       {
-        "title": "Configuração do Sistema",
-        "path": "/docs/3_Guias/configuracao",
+        "title": "Documentação Flows",
+        "path": "/docs/3_Flows/index",
         "order": 1,
-        "description": "Guia completo de configuração e personalização",
+        "description": "Guia completo sobre Flows no WhatsApp",
         "tags": [
-          "configuração",
-          "setup",
-          "personalização"
+          "flows",
+          "whatsapp",
+          "documentação"
         ]
       },
       {
-        "title": "Guia de Deploy",
-        "path": "/docs/3_Guias/deploy",
+        "title": "O que é Flows?",
+        "path": "/docs/3_Flows/flows",
         "order": 2,
-        "description": "Como fazer deploy da documentação em diferentes plataformas",
+        "description": "Introdução aos Flows do WhatsApp e suas regras",
         "tags": [
-          "deploy",
-          "produção",
-          "hosting"
+          "flows",
+          "whatsapp",
+          "conceitos"
+        ]
+      },
+      {
+        "title": "Componentes",
+        "path": "/docs/3_Flows/components",
+        "order": 3,
+        "description": "Documentação detalhada dos componentes de Flows",
+        "tags": [
+          "flows",
+          "componentes",
+          "whatsapp"
+        ]
+      },
+      {
+        "title": "Exemplos",
+        "path": "/docs/3_Flows/exemplos",
+        "order": 4,
+        "description": "Exemplos práticos de Flows no WhatsApp",
+        "tags": [
+          "flows",
+          "exemplos",
+          "whatsapp"
         ]
       }
     ]
   },
   {
-    "section": "Tutoriais",
+    "section": "Teams",
     "order": 4,
-    "path": "/docs/4_Tutoriais",
+    "path": "/docs/4_Teams",
     "pages": [
       {
-        "title": "Tutorial Avançado",
-        "path": "/docs/4_Tutoriais/avancado",
+        "title": "Como criar pacote no Teams",
+        "path": "/docs/4_Teams/criar-pacotes",
         "order": 1,
-        "description": "Aprenda funcionalidades avançadas do sistema de documentação",
+        "description": "Guia completo para criar pacotes no Teams, incluindo requisitos e configurações para Server Inbot e Outros (x.in.bot).",
         "tags": [
-          "tutorial",
-          "avançado",
-          "markdown"
+          "Teams",
+          "Pacotes",
+          "InBot",
+          "Configuração"
         ]
       }
     ]
