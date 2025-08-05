@@ -59,19 +59,23 @@ const DocViewer: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-background p-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6">
-            <h1 className="text-2xl font-bold text-destructive mb-4">{title}</h1>
-            <p className="text-destructive">{error}</p>
-            <div className="mt-4">
-              <a 
-                href="/" 
-                className="text-primary hover:text-primary/80 underline"
-              >
-                ← Voltar para a página inicial
-              </a>
-            </div>
+      <div className="p-8 max-w-4xl mx-auto">
+        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6">
+          <h1 className="text-2xl font-bold text-destructive mb-4">{title}</h1>
+          <p className="text-destructive mb-4">{error}</p>
+          <div className="space-x-4">
+            <a 
+              href="/" 
+              className="text-primary hover:text-primary/80 underline"
+            >
+              ← Voltar para a página inicial
+            </a>
+            <a 
+              href="/docs/introducao/bem-vindo" 
+              className="text-primary hover:text-primary/80 underline"
+            >
+              Ir para introdução
+            </a>
           </div>
         </div>
       </div>

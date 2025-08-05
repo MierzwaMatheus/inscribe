@@ -1,0 +1,71 @@
+[
+  {
+    "section": "Introducao",
+    "path": "/docs/introducao",
+    "pages": [
+      {
+        "title": "Bem-vindo à Documentação",
+        "path": "/docs/introducao/bem-vindo",
+        "order": 1,
+        "description": null,
+        "tags": null
+      },
+      {
+        "title": "Como Usar o Sistema",
+        "path": "/docs/introducao/como-usar",
+        "order": 2,
+        "description": "Guia básico de utilização da documentação interna",
+        "tags": [
+          "tutorial",
+          "básico",
+          "guia"
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Tutoriais",
+    "path": "/docs/tutoriais",
+    "pages": [
+      {
+        "title": "Tutorial Avançado",
+        "path": "/docs/tutoriais/avancado",
+        "order": 1,
+        "description": "Aprenda funcionalidades avançadas do sistema de documentação",
+        "tags": [
+          "tutorial",
+          "avançado",
+          "markdown"
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Guias",
+    "path": "/docs/guias",
+    "pages": [
+      {
+        "title": "Configuração do Sistema",
+        "path": "/docs/guias/configuracao",
+        "order": 1,
+        "description": "Guia completo de configuração e personalização",
+        "tags": [
+          "configuração",
+          "setup",
+          "personalização"
+        ]
+      },
+      {
+        "title": "Guia de Deploy",
+        "path": "/docs/guias/deploy",
+        "order": 2,
+        "description": "Como fazer deploy da documentação em diferentes plataformas",
+        "tags": [
+          "deploy",
+          "produção",
+          "hosting"
+        ]
+      }
+    ]
+  }
+]
