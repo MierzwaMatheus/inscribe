@@ -1,12 +1,54 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { useSearch } from '@/hooks/useSearch';
+import SearchPopup from './SearchPopup';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
   const { toast } = useToast();
+  const { searchTerm, setSearchTerm, searchResults, isLoading, isIndexing } = useSearch();
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
 
-  console.log('%c[Header] Componente de cabeçalho renderizado', 'color: #795548; font-weight: bold', { user: user?.email });
+  console.log('%c[Header] Componente de cabeçalho renderizado', 'color: #795548; font-weight: bold', { 
+    user: user?.email, 
+    isIndexing, 
+    searchResultsCount: searchResults.length 
+  });
+
+  // Fechar popup ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log(`%c[Header] Termo de busca alterado: "${value}"`, 'color: #795548');
+    setSearchTerm(value);
+    setIsSearchVisible(value.trim().length > 0);
+  };
+
+  const handleSearchFocus = () => {
+    console.log('%c[Header] Campo de busca focado', 'color: #795548');
+    if (searchTerm.trim().length > 0) {
+      setIsSearchVisible(true);
+    }
+  };
+
+  const handleCloseSearch = () => {
+    console.log('%c[Header] Fechando popup de busca', 'color: #795548');
+    setIsSearchVisible(false);
+  };
 
   const handleLogout = async () => {
     console.log('%c[Header] Iniciando processo de logout', 'color: #FF9800');
@@ -37,6 +79,57 @@ const Header: React.FC = () => {
             </svg>
           </div>
           <h1 className="text-xl font-semibold text-gray-900">InBot Docs</h1>
+        </div>
+
+        {/* Campo de busca centralizado */}
+        <div className="flex-1 max-w-lg mx-8 relative" ref={searchRef}>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              {isIndexing ? (
+                <svg className="animate-spin h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : (
+                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              )}
+            </div>
+            <input
+              type="text"
+              placeholder={isIndexing ? "Indexando documentos..." : "Buscar na documentação..."}
+              disabled={isIndexing}
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onFocus={handleSearchFocus}
+              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+            />
+            {searchTerm && (
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <button
+                  onClick={() => {
+                    setSearchTerm('');
+                    setIsSearchVisible(false);
+                  }}
+                  className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
+          
+          {/* Popup de resultados */}
+          <SearchPopup
+            searchResults={searchResults}
+            isLoading={isLoading}
+            isVisible={isSearchVisible}
+            onClose={handleCloseSearch}
+            searchTerm={searchTerm}
+          />
         </div>
 
         <div className="flex items-center space-x-4">
