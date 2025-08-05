@@ -6,7 +6,7 @@ import { BookOpen, FileText, Settings, Zap } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-8 max-w-5xl mx-auto">
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-foreground mb-4">
           Bem-vindo à Documentação InBot

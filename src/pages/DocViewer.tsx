@@ -87,13 +87,13 @@ const DocViewer: React.FC = () => {
       <article className="bg-card rounded-lg border p-8">
         {/* Cabeçalho do documento */}
         <header className="mb-8 pb-6 border-b">
-          <h1 className="text-4xl font-bold text-card-foreground mb-2">{title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">{title}</h1>
           
           {/* Metadados do frontmatter */}
           {(metadata.description || metadata.tags) && (
             <div className="mt-4 space-y-2">
               {metadata.description && (
-                <p className="text-lg text-muted-foreground">{metadata.description}</p>
+                <p className="text-lg text-gray-600">{metadata.description}</p>
               )}
               
               {metadata.tags && Array.isArray(metadata.tags) && (
@@ -101,7 +101,7 @@ const DocViewer: React.FC = () => {
                   {metadata.tags.map((tag: string, index: number) => (
                     <span 
                       key={index}
-                      className="px-2 py-1 bg-primary/10 text-primary text-sm rounded-md"
+                      className="px-2 py-1 bg-blue-100 text-blue-700 text-sm rounded-md"
                     >
                       {tag}
                     </span>
@@ -112,23 +112,23 @@ const DocViewer: React.FC = () => {
           )}
           
           {/* Breadcrumb */}
-          <div className="mt-4 text-sm text-muted-foreground">
+          <div className="mt-4 text-sm text-gray-500">
             <span>📍 /docs/{docPath || '(raiz)'}</span>
           </div>
         </header>
 
         {/* Conteúdo do documento */}
         <div 
-          className="markdown-body prose prose-slate dark:prose-invert max-w-none
-                     prose-headings:text-card-foreground 
-                     prose-p:text-card-foreground 
-                     prose-strong:text-card-foreground
-                     prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-                     prose-pre:bg-muted prose-pre:border
-                     prose-blockquote:text-muted-foreground prose-blockquote:border-l-primary
-                     prose-a:text-primary hover:prose-a:text-primary/80
-                     prose-table:text-card-foreground
-                     prose-th:text-card-foreground prose-td:text-card-foreground"
+          className="markdown-body prose prose-slate max-w-none
+                     prose-headings:text-gray-900 
+                     prose-p:text-gray-700 
+                     prose-strong:text-gray-900
+                     prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+                     prose-pre:bg-gray-50 prose-pre:border
+                     prose-blockquote:text-gray-600 prose-blockquote:border-l-blue-500
+                     prose-a:text-blue-600 hover:prose-a:text-blue-700
+                     prose-table:text-gray-700
+                     prose-th:text-gray-900 prose-td:text-gray-700"
           dangerouslySetInnerHTML={{ __html: htmlContent }} 
         />
       </article>
