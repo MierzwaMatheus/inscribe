@@ -1,7 +1,11 @@
 // scripts/generate-docs-map.js
-const fs = require("fs");
-const path = require("path");
-const matter = require("gray-matter");
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const docsPath = path.join(__dirname, "..", "public", "docs");
 const outputPath = path.join(__dirname, "..", "src", "docsMap.json");
@@ -16,6 +20,9 @@ function readDirectory(dir, basePath = "") {
     
     if (file.isDirectory()) {
       // É um diretório (seção)
+      const orderMatch = file.name.match(/^(\d+)[-_]/);
+      const order = orderMatch ? parseInt(orderMatch[1], 10) : 999;
+
       const sectionName = file.name
         .replace(/^\d+[-_]/, "") // Remove prefixos numéricos como "01-", "02_"
         .replace(/[-_]/g, " ")
@@ -25,6 +32,7 @@ function readDirectory(dir, basePath = "") {
         
       const sectionData = {
         section: sectionName,
+        order: order,
         path: `/docs/${relativePath}`,
         pages: readDirectory(fullPath, relativePath),
       };
@@ -39,6 +47,9 @@ function readDirectory(dir, basePath = "") {
         const fileContent = fs.readFileSync(fullPath, "utf-8");
         const { data } = matter(fileContent);
         const fileName = path.parse(file.name).name;
+        const orderMatch = fileName.match(/^(\d+)[-_]/);
+        const order = orderMatch ? parseInt(orderMatch[1], 10) : 999;
+
         const pagePath = `/docs/${relativePath.replace(".md", "")}`;
 
         const pageData = {
@@ -49,7 +60,7 @@ function readDirectory(dir, basePath = "") {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" "),
           path: pagePath,
-          order: data.order || 999,
+          order: data.order || order,
           description: data.description || null,
           tags: data.tags || null,
         };
@@ -61,18 +72,16 @@ function readDirectory(dir, basePath = "") {
     }
   });
 
-  // Ordena as páginas e seções
+  // Ordena as páginas e seções com base na propriedade 'order'
   result.sort((a, b) => {
-    // Seções vêm antes de páginas
-    if (a.pages && !b.pages) return -1;
-    if (!a.pages && b.pages) return 1;
-    
-    // Se ambos têm ordem definida, usa a ordem
-    if (a.order !== undefined && b.order !== undefined) {
-      if (a.order !== b.order) return a.order - b.order;
+    const orderA = a.order !== undefined ? a.order : 999;
+    const orderB = b.order !== undefined ? b.order : 999;
+
+    if (orderA !== orderB) {
+      return orderA - orderB;
     }
-    
-    // Caso contrário, ordena alfabeticamente pelo título ou nome da seção
+
+    // Se a ordem for a mesma, ordena alfabeticamente pelo título ou nome da seção
     const titleA = a.title || a.section || "";
     const titleB = b.title || b.section || "";
     return titleA.localeCompare(titleB);

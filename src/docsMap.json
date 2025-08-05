@@ -1,18 +1,19 @@
 [
   {
-    "section": "Introducao",
-    "path": "/docs/introducao",
+    "section": "Introdução",
+    "order": 1,
+    "path": "/docs/1_Introdução",
     "pages": [
       {
         "title": "Bem-vindo à Documentação",
-        "path": "/docs/introducao/bem-vindo",
+        "path": "/docs/1_Introdução/bem-vindo",
         "order": 1,
         "description": null,
         "tags": null
       },
       {
         "title": "Como Usar o Sistema",
-        "path": "/docs/introducao/como-usar",
+        "path": "/docs/1_Introdução/como-usar",
         "order": 2,
         "description": "Guia básico de utilização da documentação interna",
         "tags": [
@@ -20,16 +21,24 @@
           "básico",
           "guia"
         ]
+      },
+      {
+        "title": "Guia de Instalação",
+        "path": "/docs/1_Introdução/instalacao",
+        "order": 2,
+        "description": null,
+        "tags": null
       }
     ]
   },
   {
     "section": "Tutoriais",
-    "path": "/docs/tutoriais",
+    "order": 2,
+    "path": "/docs/2_Tutoriais",
     "pages": [
       {
         "title": "Tutorial Avançado",
-        "path": "/docs/tutoriais/avancado",
+        "path": "/docs/2_Tutoriais/avancado",
         "order": 1,
         "description": "Aprenda funcionalidades avançadas do sistema de documentação",
         "tags": [
@@ -42,11 +51,12 @@
   },
   {
     "section": "Guias",
-    "path": "/docs/guias",
+    "order": 3,
+    "path": "/docs/3_Guias",
     "pages": [
       {
         "title": "Configuração do Sistema",
-        "path": "/docs/guias/configuracao",
+        "path": "/docs/3_Guias/configuracao",
         "order": 1,
         "description": "Guia completo de configuração e personalização",
         "tags": [
@@ -57,7 +67,7 @@
       },
       {
         "title": "Guia de Deploy",
-        "path": "/docs/guias/deploy",
+        "path": "/docs/3_Guias/deploy",
         "order": 2,
         "description": "Como fazer deploy da documentação em diferentes plataformas",
         "tags": [
