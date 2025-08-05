@@ -1,45 +1,134 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { getMarkdownPath } from '../utils/pathResolver';
+import matter from 'gray-matter';
+import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css'; // Tema GitHub para destaque de código
 
 const DocViewer: React.FC = () => {
   const { '*': docPath } = useParams();
+  const [htmlContent, setHtmlContent] = useState<string>('');
+  const [title, setTitle] = useState<string>('Carregando...');
+  const [error, setError] = useState<string | null>(null);
+  const [metadata, setMetadata] = useState<any>({});
 
-  return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto p-8">
-        <div className="bg-card rounded-lg border p-6">
-          <h1 className="text-3xl font-bold text-card-foreground mb-4">
-            Visualizador de Documentos
-          </h1>
-          
-          <div className="bg-muted p-4 rounded-md mb-6">
-            <p className="text-sm text-muted-foreground mb-2">
-              <strong>Caminho do documento:</strong>
-            </p>
-            <code className="text-sm bg-background px-2 py-1 rounded border">
-              /docs/{docPath || '(raiz)'}
-            </code>
-          </div>
+  // Função para processar markdown com highlight
+  const processMarkdown = (content: string): string => {
+    // Configuração básica do marked
+    const html = marked(content) as string;
+    
+    // Aplicar highlight.js após a conversão
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    const codeBlocks = tempDiv.querySelectorAll('pre code');
+    codeBlocks.forEach((block) => {
+      const element = block as HTMLElement;
+      hljs.highlightElement(element);
+    });
+    
+    return tempDiv.innerHTML;
+  };
 
-          <div className="prose prose-slate max-w-none">
-            <p className="text-muted-foreground">
-              O conteúdo Markdown será carregado e renderizado aqui nas próximas etapas do desenvolvimento.
-            </p>
-            
-            <div className="mt-6 p-4 bg-primary/10 rounded-lg border">
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Próximas Funcionalidades:
-              </h3>
-              <ul className="space-y-1 text-sm text-muted-foreground">
-                <li>• Carregamento dinâmico de arquivos .md</li>
-                <li>• Parser de Markdown para HTML</li>
-                <li>• Processamento de frontmatter</li>
-                <li>• Menu lateral dinâmico</li>
-                <li>• Navegação entre documentos</li>
-              </ul>
+  useEffect(() => {
+    const fullPath = getMarkdownPath(`/docs/${docPath}`);
+    setError(null); // Limpa erros anteriores
+    setTitle('Carregando...');
+
+    fetch(fullPath)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Não foi possível carregar o documento: ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then(mdContent => {
+        const { content, data } = matter(mdContent);
+        setTitle(data.title || 'Documento sem título');
+        setMetadata(data);
+        setHtmlContent(processMarkdown(content));
+      })
+      .catch(err => {
+        console.error("Erro ao carregar Markdown:", err);
+        setError(`Erro ao carregar o documento: ${err.message}. Verifique se o caminho '${fullPath}' está correto.`);
+        setTitle('Erro');
+        setHtmlContent('');
+      });
+  }, [docPath]);
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background p-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6">
+            <h1 className="text-2xl font-bold text-destructive mb-4">{title}</h1>
+            <p className="text-destructive">{error}</p>
+            <div className="mt-4">
+              <a 
+                href="/" 
+                className="text-primary hover:text-primary/80 underline"
+              >
+                ← Voltar para a página inicial
+              </a>
             </div>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="max-w-4xl mx-auto p-8">
+        <article className="bg-card rounded-lg border p-8">
+          {/* Cabeçalho do documento */}
+          <header className="mb-8 pb-6 border-b">
+            <h1 className="text-4xl font-bold text-card-foreground mb-2">{title}</h1>
+            
+            {/* Metadados do frontmatter */}
+            {(metadata.description || metadata.tags) && (
+              <div className="mt-4 space-y-2">
+                {metadata.description && (
+                  <p className="text-lg text-muted-foreground">{metadata.description}</p>
+                )}
+                
+                {metadata.tags && (
+                  <div className="flex flex-wrap gap-2">
+                    {metadata.tags.map((tag: string, index: number) => (
+                      <span 
+                        key={index}
+                        className="px-2 py-1 bg-primary/10 text-primary text-sm rounded-md"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {/* Breadcrumb */}
+            <div className="mt-4 text-sm text-muted-foreground">
+              <span>📍 /docs/{docPath || '(raiz)'}</span>
+            </div>
+          </header>
+
+          {/* Conteúdo do documento */}
+          <div 
+            className="markdown-body prose prose-slate dark:prose-invert max-w-none
+                       prose-headings:text-card-foreground 
+                       prose-p:text-card-foreground 
+                       prose-strong:text-card-foreground
+                       prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+                       prose-pre:bg-muted prose-pre:border
+                       prose-blockquote:text-muted-foreground prose-blockquote:border-l-primary
+                       prose-a:text-primary hover:prose-a:text-primary/80
+                       prose-table:text-card-foreground
+                       prose-th:text-card-foreground prose-td:text-card-foreground"
+            dangerouslySetInnerHTML={{ __html: htmlContent }} 
+          />
+        </article>
       </div>
     </div>
   );
