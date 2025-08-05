@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMarkdownPath } from '../utils/pathResolver';
-import matter from 'gray-matter';
+import { parseMarkdown, DocumentMetadata } from '../utils/markdownParser';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css'; // Tema GitHub para destaque de código
@@ -11,7 +11,7 @@ const DocViewer: React.FC = () => {
   const [htmlContent, setHtmlContent] = useState<string>('');
   const [title, setTitle] = useState<string>('Carregando...');
   const [error, setError] = useState<string | null>(null);
-  const [metadata, setMetadata] = useState<any>({});
+  const [metadata, setMetadata] = useState<DocumentMetadata>({});
 
   // Função para processar markdown com highlight
   const processMarkdown = (content: string): string => {
@@ -44,7 +44,7 @@ const DocViewer: React.FC = () => {
         return response.text();
       })
       .then(mdContent => {
-        const { content, data } = matter(mdContent);
+        const { content, data } = parseMarkdown(mdContent);
         setTitle(data.title || 'Documento sem título');
         setMetadata(data);
         setHtmlContent(processMarkdown(content));
@@ -83,57 +83,55 @@ const DocViewer: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto p-8">
-        <article className="bg-card rounded-lg border p-8">
-          {/* Cabeçalho do documento */}
-          <header className="mb-8 pb-6 border-b">
-            <h1 className="text-4xl font-bold text-card-foreground mb-2">{title}</h1>
-            
-            {/* Metadados do frontmatter */}
-            {(metadata.description || metadata.tags) && (
-              <div className="mt-4 space-y-2">
-                {metadata.description && (
-                  <p className="text-lg text-muted-foreground">{metadata.description}</p>
-                )}
-                
-                {metadata.tags && (
-                  <div className="flex flex-wrap gap-2">
-                    {metadata.tags.map((tag: string, index: number) => (
-                      <span 
-                        key={index}
-                        className="px-2 py-1 bg-primary/10 text-primary text-sm rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-            
-            {/* Breadcrumb */}
-            <div className="mt-4 text-sm text-muted-foreground">
-              <span>📍 /docs/{docPath || '(raiz)'}</span>
+    <div className="p-8 max-w-4xl mx-auto">
+      <article className="bg-card rounded-lg border p-8">
+        {/* Cabeçalho do documento */}
+        <header className="mb-8 pb-6 border-b">
+          <h1 className="text-4xl font-bold text-card-foreground mb-2">{title}</h1>
+          
+          {/* Metadados do frontmatter */}
+          {(metadata.description || metadata.tags) && (
+            <div className="mt-4 space-y-2">
+              {metadata.description && (
+                <p className="text-lg text-muted-foreground">{metadata.description}</p>
+              )}
+              
+              {metadata.tags && Array.isArray(metadata.tags) && (
+                <div className="flex flex-wrap gap-2">
+                  {metadata.tags.map((tag: string, index: number) => (
+                    <span 
+                      key={index}
+                      className="px-2 py-1 bg-primary/10 text-primary text-sm rounded-md"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-          </header>
+          )}
+          
+          {/* Breadcrumb */}
+          <div className="mt-4 text-sm text-muted-foreground">
+            <span>📍 /docs/{docPath || '(raiz)'}</span>
+          </div>
+        </header>
 
-          {/* Conteúdo do documento */}
-          <div 
-            className="markdown-body prose prose-slate dark:prose-invert max-w-none
-                       prose-headings:text-card-foreground 
-                       prose-p:text-card-foreground 
-                       prose-strong:text-card-foreground
-                       prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-                       prose-pre:bg-muted prose-pre:border
-                       prose-blockquote:text-muted-foreground prose-blockquote:border-l-primary
-                       prose-a:text-primary hover:prose-a:text-primary/80
-                       prose-table:text-card-foreground
-                       prose-th:text-card-foreground prose-td:text-card-foreground"
-            dangerouslySetInnerHTML={{ __html: htmlContent }} 
-          />
-        </article>
-      </div>
+        {/* Conteúdo do documento */}
+        <div 
+          className="markdown-body prose prose-slate dark:prose-invert max-w-none
+                     prose-headings:text-card-foreground 
+                     prose-p:text-card-foreground 
+                     prose-strong:text-card-foreground
+                     prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+                     prose-pre:bg-muted prose-pre:border
+                     prose-blockquote:text-muted-foreground prose-blockquote:border-l-primary
+                     prose-a:text-primary hover:prose-a:text-primary/80
+                     prose-table:text-card-foreground
+                     prose-th:text-card-foreground prose-td:text-card-foreground"
+          dangerouslySetInnerHTML={{ __html: htmlContent }} 
+        />
+      </article>
     </div>
   );
 };
