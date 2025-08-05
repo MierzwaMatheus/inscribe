@@ -70,7 +70,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4">
+    <header className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-10 h-[75px]">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">

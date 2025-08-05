@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  min-height: 100vh;
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
@@ -106,8 +110,8 @@ All colors MUST be HSL.
 
 /* Estilos customizados para o layout da documentação */
 #root {
-  display: flex;
-  min-height: 100vh;
+  /* display: flex; */
+  /* min-height: 100vh; */
 }
 
 .sidebar {
@@ -117,7 +121,6 @@ All colors MUST be HSL.
 
 .content-area {
   flex-grow: 1;
-  overflow-x: hidden;
 }
 
 /* Estilos para o conteúdo Markdown */

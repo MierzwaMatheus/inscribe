@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
 	};
 
 	return (
-		<nav className="sidebar bg-gray-50 p-4 border-r border-gray-200 min-h-screen">
+		<nav className="sidebar bg-gray-50 p-4 border-r border-gray-200 h-full sticky top-[75px]">
 			{/* Header da Sidebar */}
 			<div className="mb-6">
 				<h2 className="text-xl font-bold text-gray-800 mb-2">
