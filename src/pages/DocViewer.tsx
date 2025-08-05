@@ -13,6 +13,11 @@ const DocViewer: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [metadata, setMetadata] = useState<DocumentMetadata>({});
 
+  console.log('%c[DocViewer] Parâmetros recebidos:', 'color: #E91E63; font-weight: bold', {
+    docPath,
+    decodedDocPath: docPath ? decodeURIComponent(docPath) : null
+  });
+
   // Função para processar markdown com highlight
   const processMarkdown = (content: string): string => {
     // Configuração básica do marked
