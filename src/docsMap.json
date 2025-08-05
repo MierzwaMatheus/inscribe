@@ -32,24 +32,6 @@
     ]
   },
   {
-    "section": "Tutoriais",
-    "order": 2,
-    "path": "/docs/2_Tutoriais",
-    "pages": [
-      {
-        "title": "Tutorial Avançado",
-        "path": "/docs/2_Tutoriais/avancado",
-        "order": 1,
-        "description": "Aprenda funcionalidades avançadas do sistema de documentação",
-        "tags": [
-          "tutorial",
-          "avançado",
-          "markdown"
-        ]
-      }
-    ]
-  },
-  {
     "section": "Guias",
     "order": 3,
     "path": "/docs/3_Guias",
@@ -74,6 +56,24 @@
           "deploy",
           "produção",
           "hosting"
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Tutoriais",
+    "order": 4,
+    "path": "/docs/4_Tutoriais",
+    "pages": [
+      {
+        "title": "Tutorial Avançado",
+        "path": "/docs/4_Tutoriais/avancado",
+        "order": 1,
+        "description": "Aprenda funcionalidades avançadas do sistema de documentação",
+        "tags": [
+          "tutorial",
+          "avançado",
+          "markdown"
         ]
       }
     ]
