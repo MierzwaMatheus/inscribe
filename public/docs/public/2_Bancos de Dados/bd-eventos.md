@@ -39,7 +39,7 @@ accessKey (string, 32 caracteres): chave fornecida ao cliente.
 }
 ```
 
-### Erros Comuns
+### Erros Comuns Autenticação
 
 | Código | Descrição |
 |---|---|
@@ -85,7 +85,7 @@ curl -X GET "https://api.inbot.com.br/v2/api/botId/123/eventsDataBase/flowNames"
 }
 ```
 
-### Erros Comuns
+### Erros Comuns FlowNames
 
 | Código | Descrição |
 |---|---|
@@ -136,7 +136,7 @@ curl -X GET "https://api.inbot.com.br/v2/api/botId/123/eventsDataBase/flowNames"
 }
 ```
 
-### Erros Comuns
+### Erros Comuns EventsDataBase
 
 | Código | Descrição |
 |---|---|
