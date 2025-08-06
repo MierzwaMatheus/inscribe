@@ -120,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ docs, type }) => {
 			</div>
 
 			{/* Seções da Documentação */}
-			<div className="space-y-4">
+			<div className="space-y-4 h-full overflow-y-scroll scrollbar-hide">
 				{docs.map((item) =>
 					'section' in item ? (
 						<RenderSection key={item.section} section={item as Section} isItemActive={isItemActive} />
