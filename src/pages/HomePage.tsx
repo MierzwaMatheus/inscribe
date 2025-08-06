@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" className="w-full">
-              <NavLink to="/public/1_Publicas/bem-vindo">
+              <NavLink to="/public/1_Como Usar o Sistema/index">
                 Acessar
               </NavLink>
             </Button>
