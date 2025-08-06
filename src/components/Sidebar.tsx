@@ -95,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({ docs, type }) => {
 	};
 
 	return (
-		<nav className="sidebar bg-gray-50 p-4 border-r border-gray-200 h-screen sticky top-[75px]">
+		<nav className="sidebar bg-gray-50 p-4 border-r border-gray-200 h-[calc(100vh-75px)] sticky top-[75px] flex flex-col justify-between">
 			{/* Header da Sidebar */}
 			<div className="mb-6">
 				<h2 className="text-xl font-bold text-gray-800 mb-2">
@@ -131,7 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({ docs, type }) => {
 			</div>
 
 			{/* Footer da Sidebar */}
-			<div className="mt-8 pt-4 border-t border-gray-200">
+			<div className="mt-auto pt-4 border-t border-gray-200">
 				<div className="text-xs text-gray-500 text-center">
 					<div className="font-medium">InBot Docs</div>
 					<div>v1.0.0</div>
