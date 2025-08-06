@@ -22,7 +22,7 @@ import {
   ChevronDown,
   ChevronRight
 } from "lucide-react";
-import docsMap from "@/docsMap.json";
+
 
 // Mapeamento de ícones para seções
 const sectionIcons: Record<string, any> = {
@@ -33,7 +33,12 @@ const sectionIcons: Record<string, any> = {
   'default': Folder,
 };
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  docs: any[];
+  type: 'public' | 'internal';
+}
+
+export function AppSidebar({ docs, type }: AppSidebarProps) {
   const { state } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -97,7 +102,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* Seções da documentação */}
-        {docsMap.map((section, index) => {
+        {docs.map((section, index) => {
           const IconComponent = sectionIcons[section.section] || sectionIcons.default;
           const isExpanded = isGroupExpanded(section.section, section.pages);
           

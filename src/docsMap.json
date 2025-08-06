@@ -123,27 +123,37 @@
   ],
   "public": [
     {
-      "section": "Publicas",
+      "section": "Como Usar O Sistema",
       "order": 1,
-      "path": "/public/1_Publicas",
+      "path": "/public/1_Como Usar o Sistema",
       "pages": [
         {
-          "title": "Documentação Publica",
-          "path": "/public/1_Publicas/bem-vindo",
+          "title": "Introdução",
+          "path": "/public/1_Como Usar o Sistema/index",
           "order": 1,
           "description": null,
           "tags": null
         },
         {
-          "title": "Como Usar o Sistema",
-          "path": "/public/1_Publicas/como-usar",
+          "title": "Geração de Token Externo",
+          "path": "/public/1_Como Usar o Sistema/geracao-token-externo",
           "order": 2,
-          "description": "Guia básico de utilização da documentação interna",
-          "tags": [
-            "tutorial",
-            "básico",
-            "guia"
-          ]
+          "description": "Aprenda a gerar um token de autenticação externa para seu bot de forma segura.",
+          "tags": null
+        }
+      ]
+    },
+    {
+      "section": "Bancos De Dados",
+      "order": 2,
+      "path": "/public/2_Bancos de Dados",
+      "pages": [
+        {
+          "title": "BD de Eventos",
+          "path": "/public/2_Bancos de Dados/bd-eventos",
+          "order": 1,
+          "description": "Documentação do banco de dados de eventos da InBot.",
+          "tags": null
         }
       ]
     }
