@@ -1,15 +1,26 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { useSearch } from '@/hooks/useSearch';
 import SearchPopup from './SearchPopup';
 
 const Header: React.FC = () => {
+  const location = useLocation();
   const { user, logout } = useAuth();
   const { toast } = useToast();
-  const { searchTerm, setSearchTerm, searchResults, isLoading, isIndexing } = useSearch();
+  const docType = location.pathname.startsWith('/internal') 
+    ? 'internal' 
+    : location.pathname.startsWith('/public') 
+    ? 'public' 
+    : undefined;
+
+  const { searchTerm, setSearchTerm, searchResults, isLoading, isIndexing } = useSearch(docType);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+
+  const isHomePage = location.pathname === '/';
+  const isPublicRoute = location.pathname.startsWith('/public');
 
   console.log('%c[Header] Componente de cabeçalho renderizado', 'color: #795548; font-weight: bold', { 
     user: user?.email, 
@@ -82,7 +93,8 @@ const Header: React.FC = () => {
         </div>
 
         {/* Campo de busca centralizado */}
-        <div className="flex-1 max-w-lg mx-8 relative" ref={searchRef}>
+        {!isHomePage && (
+          <div className="flex-1 max-w-lg mx-8 relative" ref={searchRef}>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               {isIndexing ? (
@@ -131,21 +143,24 @@ const Header: React.FC = () => {
             searchTerm={searchTerm}
           />
         </div>
+        )}
 
-        <div className="flex items-center space-x-4">
-          <div className="text-sm text-gray-600">
-            Olá, <span className="font-medium">{user?.email}</span>
+        {!isHomePage && !isPublicRoute && user && (
+          <div className="flex items-center space-x-4">
+            <div className="text-sm text-gray-600">
+              Olá, <span className="font-medium">{user?.email}</span>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+            >
+              <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              Sair
+            </button>
           </div>
-          <button
-            onClick={handleLogout}
-            className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-          >
-            <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            Sair
-          </button>
-        </div>
+        )}
       </div>
     </header>
   );

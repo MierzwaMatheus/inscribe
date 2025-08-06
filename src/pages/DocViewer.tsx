@@ -7,7 +7,11 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css'; // Tema GitHub para destaque de código
 import TableOfContents from '../components/TableOfContents';
 
-const DocViewer: React.FC = () => {
+interface DocViewerProps {
+  type: 'public' | 'internal';
+}
+
+const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
   const { '*': docPath } = useParams();
   const [htmlContent, setHtmlContent] = useState<string>('');
   const [title, setTitle] = useState<string>('Carregando...');
@@ -38,7 +42,10 @@ const DocViewer: React.FC = () => {
   };
 
   useEffect(() => {
-    const fullPath = getMarkdownPath(`/docs/${docPath}`);
+    if (!docPath) return;
+
+    // Constrói o caminho para o arquivo .md na pasta /public/docs/
+    const fullPath = getMarkdownPath(`/docs/${type}/${docPath}`);
     setError(null); // Limpa erros anteriores
     setTitle('Carregando...');
 
@@ -61,7 +68,7 @@ const DocViewer: React.FC = () => {
         setTitle('Erro');
         setHtmlContent('');
       });
-  }, [docPath]);
+  }, [docPath, type]);
 
   if (error) {
     return (
@@ -77,10 +84,10 @@ const DocViewer: React.FC = () => {
               ← Voltar para a página inicial
             </a>
             <a 
-              href="/docs/introducao/bem-vindo" 
+              href="/public/1_Publicas/bem-vindo" 
               className="text-primary hover:text-primary/80 underline"
             >
-              Ir para introdução
+              Ir para a documentação pública
             </a>
           </div>
         </div>
@@ -93,7 +100,7 @@ const DocViewer: React.FC = () => {
       <div className="flex flex-col xl:flex-row gap-8">
         {/* Conteúdo principal */}
         <div className="flex-1 min-w-0 order-2 xl:order-1">
-          <article className="bg-card rounded-lg border p-4 md:p-8">
+          <article className="bg-card rounded-lg border p-4 md:p-8 max-w-4xl mx-auto">
             {/* Cabeçalho do documento */}
             <header className="mb-8 pb-6 border-b">
               <h1 className="text-4xl font-bold text-gray-900 mb-2">{title}</h1>
@@ -122,7 +129,7 @@ const DocViewer: React.FC = () => {
               
               {/* Breadcrumb */}
               <div className="mt-4 text-sm text-gray-500">
-                <span>📍 /docs/{docPath || '(raiz)'}</span>
+                <span>📍 /{type}/{docPath || '(raiz)'}</span>
               </div>
             </header>
 
@@ -137,7 +144,9 @@ const DocViewer: React.FC = () => {
                          prose-blockquote:text-gray-600 prose-blockquote:border-l-blue-500
                          prose-a:text-blue-600 hover:prose-a:text-blue-700
                          prose-table:text-gray-700
-                         prose-th:text-gray-900 prose-td:text-gray-700"
+                         prose-th:text-gray-900 prose-td:text-gray-700
+                         prose-img:max-w-full prose-img:h-auto
+                         break-words"
               dangerouslySetInnerHTML={{ __html: htmlContent }} 
             />
           </article>
