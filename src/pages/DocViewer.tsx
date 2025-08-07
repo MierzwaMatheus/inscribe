@@ -6,6 +6,7 @@ import { marked } from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css' // Tema GitHub para destaque de código
 import TableOfContents from '../components/TableOfContents'
+import InPageSearch from '../components/InPageSearch'
 
 interface DocViewerProps {
 	type: 'public' | 'internal'
@@ -205,6 +206,9 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 					<TableOfContents htmlContent={htmlContent} />
 				</div>
 			</div>
+			
+			{/* Componente de busca na página */}
+			<InPageSearch htmlContent={htmlContent} />
 		</div>
 	)
 }

@@ -247,3 +247,30 @@ All colors MUST be HSL.
 .hljs {
 	background: #f6f8fa !important;
 }
+
+/* Estilos para busca na página */
+.in-page-search-highlight {
+	background-color: #fef08a !important;
+	color: #000 !important;
+	padding: 2px 4px;
+	border-radius: 3px;
+	transition: all 0.2s ease;
+}
+
+.current-search-match {
+	background-color: #fed7aa !important;
+	box-shadow: 0 0 0 2px #f97316 !important;
+	animation: pulse-search 1s ease-in-out;
+}
+
+@keyframes pulse-search {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
