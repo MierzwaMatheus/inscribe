@@ -29,8 +29,11 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 
 	// Função para processar markdown com highlight
 	const processMarkdown = (content: string): string => {
-		console.log('%c[DocViewer] Processando markdown...', 'color: #FF9800; font-weight: bold');
-		
+		console.log(
+			'%c[DocViewer] Processando markdown...',
+			'color: #FF9800; font-weight: bold'
+		)
+
 		// Configuração básica do marked
 		const html = marked(content) as string
 
@@ -42,22 +45,28 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 		const images = tempDiv.querySelectorAll('img')
 		images.forEach((img) => {
 			const src = img.getAttribute('src')
-			console.log('%c[DocViewer] Imagem encontrada:', 'color: #FF9800', { originalSrc: src });
-			
+			console.log('%c[DocViewer] Imagem encontrada:', 'color: #FF9800', {
+				originalSrc: src,
+			})
+
 			if (src && !src.startsWith('http') && !src.startsWith('/')) {
 				// Caminho relativo - precisa ser corrigido
 				const basePath = `/docs/${type}/${docPath}`
 				const pathParts = basePath.split('/')
 				pathParts.pop() // Remove o nome do arquivo .md
 				const imagePath = `${pathParts.join('/')}/${src}`
-				
-				console.log('%c[DocViewer] Corrigindo caminho da imagem:', 'color: #FF9800', {
-					from: src,
-					to: imagePath,
-					basePath,
-					docPath
-				});
-				
+
+				console.log(
+					'%c[DocViewer] Corrigindo caminho da imagem:',
+					'color: #FF9800',
+					{
+						from: src,
+						to: imagePath,
+						basePath,
+						docPath,
+					}
+				)
+
 				img.setAttribute('src', imagePath)
 			}
 		})
