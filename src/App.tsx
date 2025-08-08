@@ -7,9 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Header from "@/components/Header";
 import HomePage from "./pages/HomePage";
-import DocViewer from "./pages/DocViewer";
+import DocLayout from "./pages/DocLayout"; // Novo layout para docs
 import NotFound from "./pages/NotFound";
-import Sidebar from "./components/Sidebar";
 
 const queryClient = new QueryClient();
 
@@ -23,22 +22,29 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <ProtectedRoute>
-              <div className="flex flex-col w-full min-h-screen">
-                <Header />
-                <div className="flex flex-1">
-                  <Sidebar />
-                  <main className="content-area flex-grow bg-white">
-                    <Routes>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/docs/*" element={<DocViewer />} />
-                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </main>
-                </div>
-              </div>
-            </ProtectedRoute>
+            <div className="flex flex-col w-full min-h-screen">
+              <Header />
+              <Routes>
+                {/* Rota da Página Inicial */}
+                <Route path="/" element={<HomePage />} />
+
+                {/* Rotas Públicas */}
+                <Route path="/public/*" element={<DocLayout type="public" />} />
+
+                {/* Rotas Internas Protegidas */}
+                <Route 
+                  path="/internal/*" 
+                  element={
+                    <ProtectedRoute>
+                      <DocLayout type="internal" />
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* Rota de fallback */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
           </BrowserRouter>
         </AuthProvider>
       </TooltipProvider>

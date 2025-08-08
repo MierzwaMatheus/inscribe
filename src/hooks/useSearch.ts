@@ -28,7 +28,7 @@ export interface DocumentContent {
   tags?: string[];
 }
 
-export const useSearch = () => {
+export const useSearch = (type?: 'public' | 'internal') => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [documentsContent, setDocumentsContent] = useState<DocumentContent[]>([]);
@@ -45,9 +45,8 @@ export const useSearch = () => {
       const allDocuments: DocumentContent[] = [];
       
       try {
-        for (const section of docsMap) {
+        const processSection = async (section: any) => {
           console.log(`%c[useSearch] Indexando seção: ${section.section}`, 'color: #9C27B0');
-          
           for (const page of section.pages) {
             try {
               const fullPath = getMarkdownPath(page.path);
@@ -75,6 +74,18 @@ export const useSearch = () => {
               console.error(`%c[useSearch] Erro ao indexar ${page.title}:`, 'color: #F44336', error);
             }
           }
+        };
+
+        // Se um tipo for especificado, indexe apenas essa seção. Caso contrário, indexe tudo.
+        let sectionsToIndex = [];
+        if (type) {
+          sectionsToIndex = docsMap[type] || [];
+        } else {
+          sectionsToIndex = [...(docsMap.internal || []), ...(docsMap.public || [])];
+        }
+
+        for (const section of sectionsToIndex) {
+          await processSection(section);
         }
         
         setDocumentsContent(allDocuments);
@@ -87,7 +98,7 @@ export const useSearch = () => {
     };
 
     indexDocuments();
-  }, []);
+  }, [type]);
 
   // Função para encontrar matches no conteúdo
   const findContentMatches = (content: string, term: string): ContentMatch[] => {

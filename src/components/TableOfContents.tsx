@@ -100,18 +100,29 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
     };
   }, [tocItems]);
 
-  // Função para scroll suave até o elemento
-  const scrollToHeading = (id: string) => {
-    console.log('%c[TableOfContents] Navegando para:', 'color: #FF5722; font-weight: bold', id);
-    
+  // Função para scroll suave com offset
+  const scrollToWithOffset = (id: string, offset = 100) => {
+    console.log('%c[TableOfContents] Navegando para:', 'color: #FF5722; font-weight: bold', { id, offset });
+
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
       });
+
+      // Atualiza o hash na URL para refletir a navegação
+      // history.pushState(null, '', `#${id}`);
       setActiveId(id);
     }
+  };
+
+  // Função de clique para o heading
+  const handleHeadingClick = (id: string) => {
+    scrollToWithOffset(id); // Use a nova função com offset
   };
 
   if (tocItems.length === 0) {
@@ -133,7 +144,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
           return (
             <button
               key={item.id}
-              onClick={() => scrollToHeading(item.id)}
+              onClick={() => handleHeadingClick(item.id)}
               className={`
                 w-full text-left text-sm py-1.5 px-2 rounded transition-colors duration-200
                 hover:bg-blue-50 hover:text-blue-700

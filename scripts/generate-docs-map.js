@@ -1,8 +1,8 @@
 // scripts/generate-docs-map.js
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import matter from 'gray-matter'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename)
 const docsPath = path.join(__dirname, '..', 'public', 'docs')
 const outputPath = path.join(__dirname, '..', 'src', 'docsMap.json')
 
-function readDirectory(dir, basePath = '') {
+function readDirectory(dir, basePath = '', rootPath = '/docs') {
 	const files = fs.readdirSync(dir, { withFileTypes: true })
 	const result = []
 
@@ -21,7 +21,7 @@ function readDirectory(dir, basePath = '') {
 		if (file.isDirectory()) {
 			// É um diretório (seção)
 			const orderMatch = file.name.match(/^(\d+)[-_]/)
-			const order = orderMatch ? parseInt(orderMatch[1], 10) : 999
+			const order = orderMatch ? Number.parseInt(orderMatch[1], 10) : 999
 
 			const sectionName = file.name
 				.replace(/^\d+[-_]/, '') // Remove prefixos numéricos como "01-", "02_"
@@ -33,8 +33,8 @@ function readDirectory(dir, basePath = '') {
 			const sectionData = {
 				section: sectionName,
 				order: order,
-				path: `/docs/${relativePath}`,
-				pages: readDirectory(fullPath, relativePath),
+				path: `${rootPath}/${relativePath}`,
+				pages: readDirectory(fullPath, relativePath, rootPath),
 			}
 
 			// Só adiciona a seção se tiver páginas
@@ -48,9 +48,9 @@ function readDirectory(dir, basePath = '') {
 				const { data } = matter(fileContent)
 				const fileName = path.parse(file.name).name
 				const orderMatch = fileName.match(/^(\d+)[-_]/)
-				const order = orderMatch ? parseInt(orderMatch[1], 10) : 999
+				const order = orderMatch ? Number.parseInt(orderMatch[1], 10) : 999
 
-				const pagePath = `/docs/${relativePath.replace('.md', '')}`
+				const pagePath = `${rootPath}/${relativePath.replace('.md', '')}`
 
 				const pageData = {
 					title:
@@ -99,7 +99,21 @@ if (!fs.existsSync(docsPath)) {
 }
 
 try {
-	const docsMap = readDirectory(docsPath)
+	const docsMap = {
+		internal: [],
+		public: [],
+	}
+
+	const internalPath = path.join(docsPath, 'internal')
+	const publicPath = path.join(docsPath, 'public')
+
+	if (fs.existsSync(internalPath)) {
+		docsMap.internal = readDirectory(internalPath, '', '/internal')
+	}
+
+	if (fs.existsSync(publicPath)) {
+		docsMap.public = readDirectory(publicPath, '', '/public')
+	}
 
 	// Cria o diretório src se não existir
 	const srcDir = path.dirname(outputPath)
@@ -109,24 +123,23 @@ try {
 
 	fs.writeFileSync(outputPath, JSON.stringify(docsMap, null, 2), 'utf-8')
 	console.log(`✅ docsMap.json gerado com sucesso em: ${outputPath}`)
-	console.log(
-		`📊 Total de itens processados: ${
-			JSON.stringify(docsMap, null, 2).split('\n').length
-		} linhas`
-	)
 
 	// Log da estrutura gerada
 	console.log('\n📁 Estrutura gerada:')
-	docsMap.forEach((item) => {
-		if (item.pages) {
-			console.log(`  📂 ${item.section} (${item.pages.length} páginas)`)
-			item.pages.forEach((page) => {
-				console.log(`    📄 ${page.title}`)
-			})
-		} else {
-			console.log(`  📄 ${item.title}`)
-		}
+	Object.keys(docsMap).forEach((key) => {
+		console.log(`\n--- ${key.toUpperCase()} ---`)
+		docsMap[key].forEach((item) => {
+			if (item.pages) {
+				console.log(`  📂 ${item.section} (${item.pages.length} páginas)`)
+				item.pages.forEach((page) => {
+					console.log(`    📄 ${page.title}`)
+				})
+			} else {
+				console.log(`  📄 ${item.title}`)
+			}
+		})
 	})
+
 } catch (error) {
 	console.error('❌ Erro ao gerar docsMap.json:', error)
 	process.exit(1)

@@ -17,21 +17,21 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* Cards de seções principais */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-primary" />
-              Introdução
+              Documentação Pública
             </CardTitle>
             <CardDescription>
-              Comece aqui para entender o sistema
+              Acesse os guias e tutoriais disponíveis para todos.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" className="w-full">
-              <NavLink to="/docs/introducao/bem-vindo">
-                Começar
+              <NavLink to="/public/1_Como Usar o Sistema/index">
+                Acessar
               </NavLink>
             </Button>
           </CardContent>
@@ -41,35 +41,16 @@ const HomePage: React.FC = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-primary" />
-              Tutoriais
+              Documentação Interna
             </CardTitle>
             <CardDescription>
-              Aprenda funcionalidades avançadas
+              Conteúdo exclusivo para a equipe de desenvolvimento.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" className="w-full">
-              <NavLink to="/docs/tutoriais/avancado">
-                Explorar
-              </NavLink>
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="hover:shadow-lg transition-shadow">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5 text-primary" />
-              Guias
-            </CardTitle>
-            <CardDescription>
-              Configuração e deployment
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild variant="outline" className="w-full">
-              <NavLink to="/docs/guias/configuracao">
-                Configurar
+              <NavLink to="/internal/1_Introdução/bem-vindo">
+                Acessar
               </NavLink>
             </Button>
           </CardContent>
