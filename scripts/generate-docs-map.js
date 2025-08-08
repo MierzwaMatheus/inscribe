@@ -1,8 +1,8 @@
 // scripts/generate-docs-map.js
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import matter from 'gray-matter'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -21,7 +21,7 @@ function readDirectory(dir, basePath = '', rootPath = '/docs') {
 		if (file.isDirectory()) {
 			// É um diretório (seção)
 			const orderMatch = file.name.match(/^(\d+)[-_]/)
-			const order = orderMatch ? parseInt(orderMatch[1], 10) : 999
+			const order = orderMatch ? Number.parseInt(orderMatch[1], 10) : 999
 
 			const sectionName = file.name
 				.replace(/^\d+[-_]/, '') // Remove prefixos numéricos como "01-", "02_"
@@ -48,7 +48,7 @@ function readDirectory(dir, basePath = '', rootPath = '/docs') {
 				const { data } = matter(fileContent)
 				const fileName = path.parse(file.name).name
 				const orderMatch = fileName.match(/^(\d+)[-_]/)
-				const order = orderMatch ? parseInt(orderMatch[1], 10) : 999
+				const order = orderMatch ? Number.parseInt(orderMatch[1], 10) : 999
 
 				const pagePath = `${rootPath}/${relativePath.replace('.md', '')}`
 
