@@ -38,9 +38,4 @@ print(factorial(5))
 
 Esta documentação será expandida com mais recursos e funcionalidades. Continue explorando para descobrir todas as possibilidades do sistema InBot.
 
-### Links Úteis
-
-- [Guia de Instalação](instalacao)
-- [Tutorial Avançado](../tutoriais/avancado)
-
 Você pode adicionar mais conteúdo e blocos de código para testar a renderização.
