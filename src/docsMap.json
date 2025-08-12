@@ -152,6 +152,20 @@
           "title": "BD de Eventos",
           "path": "/public/2_Bancos de Dados/bd-eventos",
           "order": 1,
+          "description": "Documentação do banco de dados de personalizado da InBot.",
+          "tags": null
+        }
+      ]
+    },
+    {
+      "section": "Padrão Inbot DB",
+      "order": 3,
+      "path": "/public/3_Padrão Inbot DB",
+      "pages": [
+        {
+          "title": "BD de Eventos",
+          "path": "/public/3_Padrão Inbot DB/como_funciona",
+          "order": 1,
           "description": "Documentação do banco de dados de eventos da InBot.",
           "tags": null
         }
