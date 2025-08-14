@@ -1,18 +1,22 @@
 // src/pages/DocLayout.tsx
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Sidebar from '@/components/Sidebar';
-import DocViewer from './DocViewer';
-import docsMapJson from '@/docsMap.json';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Sidebar from "@/components/Sidebar";
+import DocViewer from "./DocViewer";
+import docsMapJson from "@/docsMap.json";
 
 interface DocLayoutProps {
-  type: 'public' | 'internal';
+  type: "public" | "internal";
 }
 
 const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
-  console.log(`%c[DocLayout] Renderizando layout para: ${type}`, 'color: #4CAF50; font-weight: bold');
+  console.log(
+    `%c[DocLayout] Renderizando layout para: ${type}`,
+    "color: #4CAF50; font-weight: bold"
+  );
 
-  const docsMap = type === 'internal' ? docsMapJson.internal : docsMapJson.public;
+  const docsMap =
+    type === "internal" ? docsMapJson.internal : docsMapJson.public;
 
   // Encontra a primeira página para redirecionamento
   const findFirstPage = (items: any[]): string | null => {
@@ -32,7 +36,7 @@ const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
   return (
     <div className="flex flex-1">
       <Sidebar docs={docsMap} type={type} />
-      <main className="content-area flex-grow bg-white">
+      <main className="content-area flex-grow bg-white dark:bg-gray-900 transition-colors">
         <Routes>
           <Route path="/*" element={<DocViewer type={type} />} />
           {firstPagePath && (

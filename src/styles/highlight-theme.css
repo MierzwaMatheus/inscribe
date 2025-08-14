@@ -1,0 +1,120 @@
+/* Estilos customizados para highlight.js com suporte ao modo escuro */
+
+/* Tema claro (padrão) */
+.hljs {
+  background: #f6f8fa !important;
+  color: #24292e !important;
+}
+
+/* Tema escuro */
+.dark .hljs {
+  background: #0d1117 !important;
+  color: #c9d1d9 !important;
+}
+
+.dark .hljs-comment,
+.dark .hljs-quote {
+  color: #8b949e !important;
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-subst {
+  color: #ff7b72 !important;
+}
+
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-variable,
+.dark .hljs-template-variable,
+.dark .hljs-tag .hljs-attr {
+  color: #79c0ff !important;
+}
+
+.dark .hljs-string,
+.dark .hljs-doctag {
+  color: #a5d6ff !important;
+}
+
+.dark .hljs-title,
+.dark .hljs-section,
+.dark .hljs-selector-id {
+  color: #d2a8ff !important;
+}
+
+.dark .hljs-type,
+.dark .hljs-class .hljs-title {
+  color: #ffa657 !important;
+}
+
+.dark .hljs-tag,
+.dark .hljs-name,
+.dark .hljs-attribute {
+  color: #7ee787 !important;
+}
+
+.dark .hljs-regexp,
+.dark .hljs-link {
+  color: #a5d6ff !important;
+}
+
+.dark .hljs-symbol,
+.dark .hljs-bullet {
+  color: #79c0ff !important;
+}
+
+.dark .hljs-built_in,
+.dark .hljs-builtin-name {
+  color: #ffa657 !important;
+}
+
+.dark .hljs-meta {
+  color: #8b949e !important;
+}
+
+.dark .hljs-deletion {
+  background: #ffeef0 !important;
+}
+
+.dark .hljs-addition {
+  background: #e6ffed !important;
+}
+
+.dark .hljs-emphasis {
+  font-style: italic !important;
+}
+
+.dark .hljs-strong {
+  font-weight: bold !important;
+}
+
+/* Ajustes para blocos de código no modo escuro */
+.dark pre {
+  background-color: #0d1117 !important;
+  border: 1px solid #30363d !important;
+}
+
+.dark code {
+  background-color: #161b22 !important;
+  color: #c9d1d9 !important;
+  border: 1px solid #30363d !important;
+}
+
+/* Ajustes para código inline */
+.dark p code,
+.dark li code,
+.dark td code {
+  background-color: #161b22 !important;
+  color: #c9d1d9 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  border: 1px solid #30363d !important;
+}
+
+/* Transições suaves */
+.hljs,
+pre,
+code {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease !important;
+}

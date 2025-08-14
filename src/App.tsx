@@ -9,12 +9,19 @@ import Header from "@/components/Header";
 import HomePage from "./pages/HomePage";
 import DocLayout from "./pages/DocLayout"; // Novo layout para docs
 import NotFound from "./pages/NotFound";
+import { useTheme } from "@/hooks/useTheme";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  console.log('%c[App] Aplicação inicializada', 'color: #E91E63; font-weight: bold; font-size: 16px');
-  
+  console.log(
+    "%c[App] Aplicação inicializada",
+    "color: #E91E63; font-weight: bold; font-size: 16px"
+  );
+
+  // Inicializar o hook de tema para aplicar o tema salvo
+  const { theme } = useTheme();
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -22,7 +29,11 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <div className="flex flex-col w-full min-h-screen">
+            <div
+              className={`flex flex-col w-full min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors ${
+                theme === "dark" ? "dark" : ""
+              }`}
+            >
               <Header />
               <Routes>
                 {/* Rota da Página Inicial */}
@@ -32,8 +43,8 @@ const App = () => {
                 <Route path="/public/*" element={<DocLayout type="public" />} />
 
                 {/* Rotas Internas Protegidas */}
-                <Route 
-                  path="/internal/*" 
+                <Route
+                  path="/internal/*"
                   element={
                     <ProtectedRoute>
                       <DocLayout type="internal" />
