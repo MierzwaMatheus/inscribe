@@ -1,11 +1,8 @@
 ---
 title: Bem-vindo à Documentação
+description: Este é um exemplo de documento Markdown para a sua aplicação de documentação interna.
 order: 1
 ---
-
-# Bem-vindo!
-
-Este é um **exemplo** de documento Markdown para a sua aplicação de documentação interna.
 
 ## Funcionalidades
 
