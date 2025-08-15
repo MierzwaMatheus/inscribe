@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-	min-height: 100vh;
+  min-height: 100vh;
 }
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
@@ -11,122 +11,126 @@ All colors MUST be HSL.
 */
 
 @layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 222.2 84% 4.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
-		--radius: 0.5rem;
+    --radius: 0.5rem;
 
-		--sidebar-background: 0 0% 98%;
+    --sidebar-background: 0 0% 98%;
 
-		--sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-foreground: 240 5.3% 26.1%;
 
-		--sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 240 5.9% 10%;
 
-		--sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 98%;
 
-		--sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 240 4.8% 95.9%;
 
-		--sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
 
-		--sidebar-border: 220 13% 91%;
+    --sidebar-border: 220 13% 91%;
 
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 
-	.dark {
-		--background: 222.2 84% 4.9%;
-		--foreground: 210 40% 98%;
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-		--card: 222.2 84% 4.9%;
-		--card-foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-		--popover: 222.2 84% 4.9%;
-		--popover-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-		--primary: 210 40% 98%;
-		--primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-		--secondary: 217.2 32.6% 17.5%;
-		--secondary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
-		--muted: 217.2 32.6% 17.5%;
-		--muted-foreground: 215 20.2% 65.1%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-		--accent: 217.2 32.6% 17.5%;
-		--accent-foreground: 210 40% 98%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-		--border: 217.2 32.6% 17.5%;
-		--input: 217.2 32.6% 17.5%;
-		--ring: 212.7 26.8% 83.9%;
-		--sidebar-background: 240 5.9% 10%;
-		--sidebar-foreground: 240 4.8% 95.9%;
-		--sidebar-primary: 224.3 76.3% 48%;
-		--sidebar-primary-foreground: 0 0% 100%;
-		--sidebar-accent: 240 3.7% 15.9%;
-		--sidebar-accent-foreground: 240 4.8% 95.9%;
-		--sidebar-border: 240 3.7% 15.9%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
 @layer base {
-	* {
-		@apply border-border;
-	}
+  * {
+    @apply border-border;
+  }
 
-	body {
-		@apply bg-background text-foreground;
-	}
+  body {
+    @apply bg-background text-foreground transition-colors;
+  }
+
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }
 
 /* Estilos customizados para o layout da documentação */
 #root {
-	/* display: flex; */
-	/* min-height: 100vh; */
+  /* display: flex; */
+  /* min-height: 100vh; */
 }
 
 .sidebar {
-	width: 280px;
-	flex-shrink: 0;
+  width: 280px;
+  flex-shrink: 0;
 }
 
 .content-area {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 
 /* Estilos para o conteúdo Markdown */
 .markdown-body {
-	line-height: 1.6;
-	font-size: 16px;
+  line-height: 1.6;
+  font-size: 16px;
 }
 
 .markdown-body h1,
@@ -135,142 +139,322 @@ All colors MUST be HSL.
 .markdown-body h4,
 .markdown-body h5,
 .markdown-body h6 {
-	font-weight: 600;
-	margin-top: 1.5em;
-	margin-bottom: 0.5em;
-	line-height: 1.25;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
 }
 
 .markdown-body h1 {
-	font-size: 2.25em;
-	border-bottom: 1px solid #e5e7eb;
-	padding-bottom: 0.3em;
+  font-size: 2.25em;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.3em;
 }
 
 .markdown-body h2 {
-	font-size: 1.875em;
-	border-bottom: 1px solid #e5e7eb;
-	padding-bottom: 0.3em;
+  font-size: 1.875em;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.3em;
 }
 
 .markdown-body h3 {
-	font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .markdown-body h4 {
-	font-size: 1.25em;
+  font-size: 1.25em;
 }
 
 .markdown-body p {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .markdown-body ul,
 .markdown-body ol {
-	margin-left: 1.5em;
-	margin-bottom: 1em;
+  margin-left: 1.5em;
+  margin-bottom: 1em;
 }
 
 .markdown-body li {
-	margin-bottom: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 .markdown-body pre {
-	background-color: #f6f8fa;
-	border-radius: 6px;
-	padding: 16px;
-	overflow-x: auto;
-	margin: 1em 0;
-	border: 1px solid #e1e4e8;
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 1em 0;
+  border: 1px solid #e1e4e8;
 }
 
 .markdown-body code {
-	font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo',
-		monospace;
-	font-size: 85%;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo",
+    monospace;
+  font-size: 85%;
 }
 
 .markdown-body pre code {
-	background: transparent;
-	padding: 0;
-	border: none;
+  background: transparent;
+  padding: 0;
+  border: none;
 }
 
 .markdown-body code:not(pre code) {
-	background-color: rgba(175, 184, 193, 0.2);
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
+  background-color: rgba(175, 184, 193, 0.2);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
 }
 
 .markdown-body a {
-	color: #0969da;
-	text-decoration: none;
+  color: #0969da;
+  text-decoration: none;
 }
 
 .markdown-body a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .markdown-body blockquote {
-	border-left: 4px solid #d1d5db;
-	padding-left: 1rem;
-	margin: 1rem 0;
-	color: #6b7280;
-	font-style: italic;
+  border-left: 4px solid #d1d5db;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #6b7280;
+  font-style: italic;
 }
 
 .markdown-body table {
-	border-collapse: collapse;
-	width: 100%;
-	margin: 1em 0;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
 }
 
 .markdown-body th,
 .markdown-body td {
-	border: 1px solid #d1d5db;
-	padding: 8px 12px;
-	text-align: left;
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  text-align: left;
 }
 
 .markdown-body th {
-	background-color: #f9fafb;
-	font-weight: 600;
+  background-color: #f9fafb;
+  font-weight: 600;
 }
 
 .markdown-body img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 6px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
 }
 
 /* Estilos para highlight.js */
 .hljs {
-	background: #f6f8fa !important;
+  background: #f6f8fa !important;
 }
 
 /* Estilos para busca na página */
 .in-page-search-highlight {
-	background-color: #fef08a !important;
-	color: #000 !important;
-	padding: 2px 4px;
-	border-radius: 3px;
-	transition: all 0.2s ease;
+  background-color: #fef08a !important;
+  color: #000 !important;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
 }
 
 .current-search-match {
-	background-color: #fed7aa !important;
-	box-shadow: 0 0 0 2px #f97316 !important;
-	animation: pulse-search 1s ease-in-out;
+  background-color: #fed7aa !important;
+  box-shadow: 0 0 0 2px #f97316 !important;
+  animation: pulse-search 1s ease-in-out;
 }
 
 @keyframes pulse-search {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.05);
-	}
-	100% {
-		transform: scale(1);
-	}
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Estilos customizados para prose no modo escuro */
+.dark .prose,
+.dark .prose-slate {
+  color: #e5e7eb !important;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6,
+.dark .prose-slate h1,
+.dark .prose-slate h2,
+.dark .prose-slate h3,
+.dark .prose-slate h4,
+.dark .prose-slate h5,
+.dark .prose-slate h6 {
+  color: #f9fafb !important;
+}
+
+.dark .prose p,
+.dark .prose-slate p {
+  color: #d1d5db !important;
+}
+
+.dark .prose a,
+.dark .prose-slate a {
+  color: #60a5fa !important;
+}
+
+.dark .prose a:hover,
+.dark .prose-slate a:hover {
+  color: #93c5fd !important;
+}
+
+.dark .prose strong,
+.dark .prose-slate strong {
+  color: #f3f4f6 !important;
+}
+
+.dark .prose em,
+.dark .prose-slate em {
+  color: #e5e7eb !important;
+}
+
+.dark .prose blockquote,
+.dark .prose-slate blockquote {
+  color: #9ca3af !important;
+  border-left-color: #4b5563 !important;
+}
+
+.dark .prose ul li,
+.dark .prose ol li,
+.dark .prose-slate ul li,
+.dark .prose-slate ol li {
+  color: #d1d5db !important;
+}
+
+.dark .prose table,
+.dark .prose-slate table {
+  border-color: #374151 !important;
+}
+
+.dark .prose th,
+.dark .prose-slate th {
+  color: #f9fafb !important;
+  border-color: #374151 !important;
+  background-color: #1f2937 !important;
+}
+
+.dark .prose td,
+.dark .prose-slate td {
+  color: #d1d5db !important;
+  border-color: #374151 !important;
+}
+
+.dark .prose hr,
+.dark .prose-slate hr {
+  border-color: #4b5563 !important;
+}
+
+/* Estilos específicos para markdown-body no modo escuro */
+.dark .markdown-body {
+  color: #e5e7eb !important;
+}
+
+.dark .markdown-body h1,
+.dark .markdown-body h2,
+.dark .markdown-body h3,
+.dark .markdown-body h4,
+.dark .markdown-body h5,
+.dark .markdown-body h6 {
+  color: #f9fafb !important;
+}
+
+.dark .markdown-body p {
+  color: #d1d5db !important;
+}
+
+.dark .markdown-body a {
+  color: #60a5fa !important;
+}
+
+.dark .markdown-body strong {
+  color: #f3f4f6 !important;
+}
+
+/* Estilos para highlight de busca no modo escuro */
+.dark .in-page-search-highlight {
+  background-color: #fbbf24 !important;
+  color: #000 !important;
+}
+
+.dark .current-search-match {
+  background-color: #f59e0b !important;
+  box-shadow: 0 0 0 2px #d97706 !important;
+}
+
+/* Estilos modernos para barras de scroll */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: hsl(var(--muted-foreground) / 0.7);
+}
+
+::-webkit-scrollbar-corner {
+  background: hsl(var(--muted));
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) hsl(var(--muted));
+}
+
+/* Estilos específicos para modo escuro */
+.dark ::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+.dark ::-webkit-scrollbar-thumb:active {
+  background: hsl(var(--muted-foreground) / 0.8);
+}
+
+.dark ::-webkit-scrollbar-corner {
+  background: hsl(var(--muted));
+}
+
+.dark * {
+  scrollbar-color: hsl(var(--muted-foreground) / 0.4) hsl(var(--muted));
 }
