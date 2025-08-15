@@ -1,13 +1,9 @@
 ---
 title: Como Usar o Sistema
 order: 2
-description: Guia básico de utilização da documentação interna
+description: Este guia explica como navegar e utilizar o sistema de documentação interna de forma eficiente.
 tags: [tutorial, básico, guia]
 ---
-
-# Como Usar o Sistema
-
-Este guia explica como navegar e utilizar o sistema de documentação interna de forma eficiente.
 
 ## Navegação Básica
 
