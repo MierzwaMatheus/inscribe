@@ -118,3 +118,39 @@ code {
   transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease !important;
 }
+
+/* Prevenção de overflow horizontal */
+.markdown-body pre {
+  overflow-x: auto !important;
+  max-width: 100% !important;
+  white-space: pre !important;
+}
+
+.markdown-body code {
+  word-break: break-all !important;
+  white-space: pre-wrap !important;
+}
+
+.markdown-body table {
+  display: block !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+
+.markdown-body table tbody {
+  display: table !important;
+  width: 100% !important;
+}
+
+/* Quebra de linha para URLs e texto longo */
+.markdown-body a {
+  word-break: break-all !important;
+  overflow-wrap: break-word !important;
+}
+
+.markdown-body p,
+.markdown-body li {
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}

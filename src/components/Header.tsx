@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { ThemeToggle } from "./ThemeToggle";
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
   return (
     <header className="bg-gradient-to-r from-blue-400 to-purple-400 dark:bg-gradient-to-r dark:from-[#0171bd] dark:to-[#940078] border-b border-gray-200 dark:border-gray-700 px-6 py-4 sticky top-0 z-10 h-[75px] transition-colors">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <Link to="/" className="flex items-center space-x-4 hover:opacity-80 transition-opacity">
           <div className="h-8 w-8 bg-white/30 dark:bg-white/20 rounded-lg flex items-center justify-center transition-colors backdrop-blur-sm">
             <svg
               className="h-5 w-5 text-white"
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           <h1 className="text-xl font-semibold text-white dark:text-white transition-colors drop-shadow-sm">
             InBot Docs
           </h1>
-        </div>
+        </Link>
 
         <div className="flex items-center space-x-4">
           {/* Botão de alternância de tema sempre visível */}

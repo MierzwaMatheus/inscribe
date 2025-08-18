@@ -116,6 +116,7 @@ All colors MUST be HSL.
 #root {
   /* display: flex; */
   /* min-height: 100vh; */
+  overflow-x: hidden;
 }
 
 .sidebar {
@@ -125,6 +126,18 @@ All colors MUST be HSL.
 
 .content-area {
   flex-grow: 1;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+/* Prevenção global de overflow horizontal */
+body, html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Estilos para o conteúdo Markdown */
@@ -186,6 +199,8 @@ All colors MUST be HSL.
   overflow-x: auto;
   margin: 1em 0;
   border: 1px solid #e1e4e8;
+  max-width: 100%;
+  white-space: pre;
 }
 
 .markdown-body code {
@@ -204,6 +219,8 @@ All colors MUST be HSL.
   background-color: rgba(175, 184, 193, 0.2);
   padding: 0.2em 0.4em;
   border-radius: 3px;
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 
 .markdown-body a {
@@ -227,6 +244,15 @@ All colors MUST be HSL.
   border-collapse: collapse;
   width: 100%;
   margin: 1em 0;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.markdown-body table tbody {
+  display: table;
+  width: 100%;
 }
 
 .markdown-body th,
@@ -234,6 +260,7 @@ All colors MUST be HSL.
   border: 1px solid #d1d5db;
   padding: 8px 12px;
   text-align: left;
+  white-space: nowrap;
 }
 
 .markdown-body th {

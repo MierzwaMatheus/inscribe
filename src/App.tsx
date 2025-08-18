@@ -29,11 +29,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <div
-              className={`flex flex-col w-full min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors ${
-                theme === "dark" ? "dark" : ""
-              }`}
-            >
+            <div className="flex flex-col w-full min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
               <Header />
               <Routes>
                 {/* Rota da Página Inicial */}

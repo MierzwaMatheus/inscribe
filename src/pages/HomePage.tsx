@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full">
+            <Button asChild variant="gradient" className="w-full">
               <NavLink to="/public/1_Como Usar o Sistema/index">
                 Acessar
               </NavLink>
@@ -48,7 +48,7 @@ const HomePage: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full">
+            <Button asChild variant="gradient" className="w-full">
               <NavLink to="/internal/1_Introdução/bem-vindo">
                 Acessar
               </NavLink>

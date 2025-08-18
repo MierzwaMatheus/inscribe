@@ -9,14 +9,14 @@
           "title": "Bem-vindo à Documentação",
           "path": "/internal/1_Introdução/bem-vindo",
           "order": 1,
-          "description": null,
+          "description": "Este é um exemplo de documento Markdown para a sua aplicação de documentação interna.",
           "tags": null
         },
         {
           "title": "Como Usar o Sistema",
           "path": "/internal/1_Introdução/como-usar",
           "order": 2,
-          "description": "Guia básico de utilização da documentação interna",
+          "description": "Este guia explica como navegar e utilizar o sistema de documentação interna de forma eficiente.",
           "tags": [
             "tutorial",
             "básico",
