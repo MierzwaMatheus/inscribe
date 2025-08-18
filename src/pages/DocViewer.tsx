@@ -142,11 +142,11 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
   }
 
   return (
-    <div className="p-4 md:p-8 w-full max-w-none overflow-x-hidden">
-      <div className="flex flex-col xl:flex-row gap-8 max-w-7xl mx-auto">
+    <div className="w-full h-full overflow-y-auto">
+      <div className="flex flex-col xl:flex-row gap-4 xl:gap-8 p-4 xl:p-6 min-h-full">
         {/* Conteúdo principal */}
         <div className="flex-1 min-w-0 order-2 xl:order-1 overflow-x-hidden">
-          <article className="bg-card dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 md:p-8 w-full max-w-none transition-colors">
+          <article className="p-4 md:p-6 xl:p-8 w-full max-w-none">
             {/* Cabeçalho do documento */}
             <header className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700 transition-colors">
               <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 transition-colors">
@@ -205,8 +205,10 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
         </div>
 
         {/* Tabela de conteúdos na lateral direita */}
-        <div className="w-full xl:w-80 flex-shrink-0 order-1 xl:order-2">
-          <TableOfContents htmlContent={htmlContent} />
+        <div className="w-full xl:w-80 flex-shrink-0 order-1 xl:order-2 p-4">
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 sticky top-4">
+            <TableOfContents htmlContent={htmlContent} />
+          </div>
         </div>
       </div>
 

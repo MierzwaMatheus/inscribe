@@ -159,7 +159,7 @@ const Sidebar: React.FC<SidebarProps> = ({ docs, type }) => {
   };
 
   return (
-    <nav className="sidebar bg-gray-50 dark:bg-gray-900 p-4 border-r border-gray-200 dark:border-gray-700 h-[calc(100vh-75px)] sticky top-[75px] flex flex-col justify-between transition-colors">
+    <nav className="sidebar p-6 h-full flex flex-col justify-between">
       {/* Header da Sidebar */}
       <div className="mb-6">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 transition-colors">
