@@ -34,9 +34,9 @@ const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
   const firstPagePath = findFirstPage(docsMap);
 
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-1 overflow-x-hidden">
       <Sidebar docs={docsMap} type={type} />
-      <main className="content-area flex-grow bg-white dark:bg-gray-900 transition-colors">
+      <main className="content-area flex-grow bg-white dark:bg-gray-900 transition-colors overflow-x-hidden min-w-0">
         <Routes>
           <Route path="/*" element={<DocViewer type={type} />} />
           {firstPagePath && (

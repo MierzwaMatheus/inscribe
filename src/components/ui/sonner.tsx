@@ -1,10 +1,12 @@
-import { useTheme } from "next-themes"
+import { useTheme } from "@/hooks/useTheme"
 import { Toaster as Sonner, toast } from "sonner"
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+  console.log('%c[Sonner] Componente Toaster renderizado', 'color: #FF9800; font-weight: bold');
+  const { theme } = useTheme()
+  console.log('%c[Sonner] Tema atual:', 'color: #FF9800', theme);
 
   return (
     <Sonner

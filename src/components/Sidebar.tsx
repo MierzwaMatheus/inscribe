@@ -36,7 +36,7 @@ const RenderPage: React.FC<{
         to={page.path}
         className={`group flex items-center gap-2 p-2 rounded-md transition-all duration-200 ${
           isActive
-            ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-semibold border-l-2 border-blue-500 dark:border-blue-400"
+            ? "bg-gradient-to-r from-blue-400 to-purple-400 dark:bg-gradient-to-r dark:from-[#0171bd] dark:to-[#940078] text-white dark:text-white font-semibold border-l-2 border-blue-500 dark:border-blue-400"
             : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 hover:translate-x-1"
         }`}
       >

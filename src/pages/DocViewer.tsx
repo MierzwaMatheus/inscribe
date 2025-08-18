@@ -142,11 +142,11 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
   }
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto">
-      <div className="flex flex-col xl:flex-row gap-8">
+    <div className="p-4 md:p-8 w-full max-w-none overflow-x-hidden">
+      <div className="flex flex-col xl:flex-row gap-8 max-w-7xl mx-auto">
         {/* Conteúdo principal */}
-        <div className="flex-1 min-w-0 order-2 xl:order-1">
-          <article className="bg-card dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 md:p-8 max-w-4xl mx-auto transition-colors">
+        <div className="flex-1 min-w-0 order-2 xl:order-1 overflow-x-hidden">
+          <article className="bg-card dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 md:p-8 w-full max-w-none transition-colors">
             {/* Cabeçalho do documento */}
             <header className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700 transition-colors">
               <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 transition-colors">
@@ -187,15 +187,15 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 
             {/* Conteúdo do documento */}
             <div
-              className="markdown-body prose prose-slate max-w-none
+              className="markdown-body prose prose-slate max-w-none w-full overflow-x-auto
                          prose-headings:text-gray-900 dark:prose-headings:text-gray-100
                          prose-p:text-gray-700 dark:prose-p:text-gray-300
                          prose-strong:text-gray-900 dark:prose-strong:text-gray-100
-                         prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-50 dark:prose-code:bg-blue-900/30 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-                         prose-pre:bg-gray-50 dark:prose-pre:bg-gray-800 prose-pre:border dark:prose-pre:border-gray-700
+                         prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-50 dark:prose-code:bg-blue-900/30 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:break-all
+                         prose-pre:bg-gray-50 dark:prose-pre:bg-gray-800 prose-pre:border dark:prose-pre:border-gray-700 prose-pre:overflow-x-auto prose-pre:max-w-full
                          prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400
-                         prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-700 dark:hover:prose-a:text-blue-300
-                         prose-table:text-gray-700 dark:prose-table:text-gray-300
+                         prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-700 dark:hover:prose-a:text-blue-300 prose-a:break-all
+                         prose-table:text-gray-700 dark:prose-table:text-gray-300 prose-table:table-auto prose-table:w-full prose-table:overflow-x-auto
                          prose-th:text-gray-900 dark:prose-th:text-gray-100 prose-td:text-gray-700 dark:prose-td:text-gray-300
                          prose-img:max-w-full prose-img:h-auto
                          break-words transition-colors"
