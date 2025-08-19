@@ -52,11 +52,11 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
     // Garantir que todos os headings tenham IDs únicos
     const headings = tempDiv.querySelectorAll("h1, h2, h3, h4, h5, h6");
     const usedIds = new Set<string>();
-    
+
     headings.forEach((heading, index) => {
       let headingId = heading.id;
       const text = heading.textContent || "";
-      
+
       // Se não tem ID ou o ID já está sendo usado, gerar um novo
       if (!headingId || usedIds.has(headingId)) {
         const slugId = text
@@ -65,18 +65,19 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
           .replace(/\s+/g, "-")
           .replace(/-+/g, "-")
           .trim();
-          
+
         // Se o slugId já existe ou está vazio, usar o índice
-        headingId = (slugId && !usedIds.has(slugId)) ? slugId : `heading-${index}`;
+        headingId =
+          slugId && !usedIds.has(slugId) ? slugId : `heading-${index}`;
         heading.id = headingId;
-        
+
         console.log(
           "%c[DocViewer] ID gerado para heading:",
           "color: #4CAF50; font-weight: bold",
           { text, id: headingId, wasEmpty: !heading.id }
         );
       }
-      
+
       // Registrar o ID usado
       usedIds.add(headingId);
     });
@@ -187,7 +188,7 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
             "color: #FF9800; font-weight: bold",
             hash
           );
-          
+
           // Tentar encontrar o elemento novamente após um tempo maior
           setTimeout(() => {
             const retryElement = document.getElementById(hash);
