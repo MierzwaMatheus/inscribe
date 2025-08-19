@@ -39,7 +39,7 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
     // Configuração do marked com geração automática de IDs para headings
     marked.setOptions({
       headerIds: true,
-      headerPrefix: '',
+      headerPrefix: "",
     });
 
     // Configuração básica do marked
@@ -50,24 +50,35 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
     tempDiv.innerHTML = html;
 
     // Garantir que todos os headings tenham IDs únicos
-    const headings = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const headings = tempDiv.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    const usedIds = new Set<string>();
+    
     headings.forEach((heading, index) => {
-      if (!heading.id) {
-        const text = heading.textContent || '';
+      let headingId = heading.id;
+      const text = heading.textContent || "";
+      
+      // Se não tem ID ou o ID já está sendo usado, gerar um novo
+      if (!headingId || usedIds.has(headingId)) {
         const slugId = text
           .toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
+          .replace(/[^a-z0-9\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-")
           .trim();
-        heading.id = slugId || `heading-${index}`;
+          
+        // Se o slugId já existe ou está vazio, usar o índice
+        headingId = (slugId && !usedIds.has(slugId)) ? slugId : `heading-${index}`;
+        heading.id = headingId;
         
         console.log(
           "%c[DocViewer] ID gerado para heading:",
           "color: #4CAF50; font-weight: bold",
-          { text, id: heading.id }
+          { text, id: headingId, wasEmpty: !heading.id }
         );
       }
+      
+      // Registrar o ID usado
+      usedIds.add(headingId);
     });
 
     // Corrigir caminhos das imagens
@@ -152,30 +163,56 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
         "color: #9C27B0; font-weight: bold",
         hash
       );
-      
+
       // Aguardar um pouco para garantir que o DOM foi renderizado
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - 100;
-          
+
           window.scrollTo({
             top: offsetPosition,
             behavior: "smooth",
           });
-          
+
           console.log(
             "%c[DocViewer] Navegação para hash concluída:",
             "color: #4CAF50; font-weight: bold",
             hash
           );
         } else {
-          console.warn(
+          console.error(
             "%c[DocViewer] Elemento não encontrado para hash:",
             "color: #FF9800; font-weight: bold",
             hash
           );
+          
+          // Tentar encontrar o elemento novamente após um tempo maior
+          setTimeout(() => {
+            const retryElement = document.getElementById(hash);
+            if (retryElement) {
+              const elementPosition = retryElement.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - 100;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
+
+              console.log(
+                "%c[DocViewer] Navegação para hash concluída na segunda tentativa:",
+                "color: #4CAF50; font-weight: bold",
+                hash
+              );
+            } else {
+              console.error(
+                "%c[DocViewer] Elemento não encontrado mesmo após segunda tentativa:",
+                "color: #F44336; font-weight: bold",
+                hash
+              );
+            }
+          }, 500);
         }
       }, 300);
     }
@@ -272,7 +309,7 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
         {/* Tabela de conteúdos na lateral direita */}
         <div className="w-full xl:w-80 flex-shrink-0 order-1 xl:order-2 p-4">
           <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 sticky top-4">
-            <TableOfContents htmlContent={htmlContent} />
+            {htmlContent && <TableOfContents htmlContent={htmlContent} />}
           </div>
         </div>
       </div>

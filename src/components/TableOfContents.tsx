@@ -35,8 +35,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
       return;
     }
 
-    // Aguardar um pouco para garantir que o DOM foi atualizado
-    const timer = setTimeout(() => {
+    // Função para processar os headings
+    const processHeadings = () => {
       const headings = document.querySelectorAll(
         ".markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6"
       );
@@ -46,22 +46,36 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
         headings.length
       );
 
+      if (headings.length === 0) {
+        console.warn(
+          "%c[TableOfContents] Nenhum título encontrado no DOM. Tentando novamente em 200ms.",
+          "color: #FF9800; font-weight: bold"
+        );
+        return false;
+      }
+
       const items: TocItem[] = [];
+      const usedIds = new Set<string>();
 
       headings.forEach((heading, index) => {
         const level = parseInt(heading.tagName.charAt(1));
         const text = heading.textContent || "";
 
-        // Se o heading não tem ID, vamos criar um
-        if (!heading.id) {
+        // Se o heading não tem ID ou o ID já está sendo usado, vamos criar um
+        if (!heading.id || usedIds.has(heading.id)) {
           const slugId = text
             .toLowerCase()
             .replace(/[^a-z0-9\s-]/g, "")
             .replace(/\s+/g, "-")
             .replace(/-+/g, "-")
             .trim();
-          heading.id = slugId || `heading-${index}`;
+          
+          // Se o slugId já existe ou está vazio, usar o índice
+          heading.id = (slugId && !usedIds.has(slugId)) ? slugId : `heading-${index}`;
         }
+
+        // Registrar o ID usado
+        usedIds.add(heading.id);
 
         items.push({
           id: heading.id,
@@ -81,7 +95,37 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
       });
 
       setTocItems(items);
-    }, 100);
+      return true;
+    };
+
+    // Tentar processar os headings com tentativas múltiplas
+    let attempts = 0;
+    const maxAttempts = 5;
+    const attemptInterval = 200; // ms
+
+    const tryProcessHeadings = () => {
+      if (attempts >= maxAttempts) {
+        console.error(
+          "%c[TableOfContents] Falha ao encontrar títulos após várias tentativas",
+          "color: #F44336; font-weight: bold"
+        );
+        return;
+      }
+
+      attempts++;
+      console.log(
+        "%c[TableOfContents] Tentativa %d de processar títulos",
+        "color: #2196F3; font-weight: bold",
+        attempts
+      );
+
+      if (!processHeadings()) {
+        setTimeout(tryProcessHeadings, attemptInterval);
+      }
+    };
+
+    // Iniciar o processo com um pequeno atraso para garantir que o DOM foi atualizado
+    const timer = setTimeout(tryProcessHeadings, 100);
 
     return () => clearTimeout(timer);
   }, [htmlContent]);
@@ -92,6 +136,14 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
       "%c[TableOfContents] Configurando observer de scroll",
       "color: #3F51B5; font-weight: bold"
     );
+
+    if (tocItems.length === 0) {
+      console.log(
+        "%c[TableOfContents] Nenhum item para observar",
+        "color: #FF9800; font-weight: bold"
+      );
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -113,12 +165,26 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
     );
 
     // Observar todos os headings
+    let observedElements = 0;
     tocItems.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) {
         observer.observe(element);
+        observedElements++;
+      } else {
+        console.warn(
+          "%c[TableOfContents] Elemento não encontrado para observar:",
+          "color: #FF9800; font-weight: bold",
+          item.id
+        );
       }
     });
+
+    console.log(
+      "%c[TableOfContents] Elementos observados:",
+      "color: #4CAF50; font-weight: bold",
+      observedElements
+    );
 
     return () => {
       observer.disconnect();
@@ -148,8 +214,14 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
       });
 
       // Atualiza o hash na URL para refletir a navegação
-      // history.pushState(null, '', `#${id}`);
+      window.location.hash = id;
       setActiveId(id);
+    } else {
+      console.error(
+        "%c[TableOfContents] Elemento não encontrado:",
+        "color: #F44336; font-weight: bold",
+        id
+      );
     }
   };
 
@@ -160,17 +232,20 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
       "color: #E91E63; font-weight: bold",
       id
     );
+
+    // Atualizar a URL com o hash da seção e acionar o scroll
+    window.location.hash = id;
     
-    scrollToWithOffset(id); // Use a nova função com offset
-    
-    // Atualizar a URL com o hash da seção
-    window.history.pushState(null, '', `#${id}`);
-    
-    console.log(
-      "%c[TableOfContents] URL atualizada com hash:",
-      "color: #4CAF50; font-weight: bold",
-      `#${id}`
-    );
+    // Usar setTimeout para garantir que o hash foi atualizado antes de fazer o scroll
+    setTimeout(() => {
+      scrollToWithOffset(id, 100);
+      
+      console.log(
+        "%c[TableOfContents] URL atualizada com hash:",
+        "color: #4CAF50; font-weight: bold",
+        `#${id}`
+      );
+    }, 50);
   };
 
   if (tocItems.length === 0) {
