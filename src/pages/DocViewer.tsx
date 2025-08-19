@@ -36,12 +36,39 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
       "color: #FF9800; font-weight: bold"
     );
 
+    // Configuração do marked com geração automática de IDs para headings
+    marked.setOptions({
+      headerIds: true,
+      headerPrefix: '',
+    });
+
     // Configuração básica do marked
     const html = marked(content) as string;
 
     // Aplicar highlight.js após a conversão
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = html;
+
+    // Garantir que todos os headings tenham IDs únicos
+    const headings = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    headings.forEach((heading, index) => {
+      if (!heading.id) {
+        const text = heading.textContent || '';
+        const slugId = text
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim();
+        heading.id = slugId || `heading-${index}`;
+        
+        console.log(
+          "%c[DocViewer] ID gerado para heading:",
+          "color: #4CAF50; font-weight: bold",
+          { text, id: heading.id }
+        );
+      }
+    });
 
     // Corrigir caminhos das imagens
     const images = tempDiv.querySelectorAll("img");
@@ -115,6 +142,44 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
         setHtmlContent("");
       });
   }, [docPath, type]);
+
+  // Efeito para navegar para seção específica via hash na URL
+  useEffect(() => {
+    if (htmlContent && window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      console.log(
+        "%c[DocViewer] Navegando para hash da URL:",
+        "color: #9C27B0; font-weight: bold",
+        hash
+      );
+      
+      // Aguardar um pouco para garantir que o DOM foi renderizado
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - 100;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+          
+          console.log(
+            "%c[DocViewer] Navegação para hash concluída:",
+            "color: #4CAF50; font-weight: bold",
+            hash
+          );
+        } else {
+          console.warn(
+            "%c[DocViewer] Elemento não encontrado para hash:",
+            "color: #FF9800; font-weight: bold",
+            hash
+          );
+        }
+      }, 300);
+    }
+  }, [htmlContent]);
 
   if (error) {
     return (

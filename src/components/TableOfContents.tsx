@@ -155,7 +155,22 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ htmlContent }) => {
 
   // Função de clique para o heading
   const handleHeadingClick = (id: string) => {
+    console.log(
+      "%c[TableOfContents] Clique no item do índice:",
+      "color: #E91E63; font-weight: bold",
+      id
+    );
+    
     scrollToWithOffset(id); // Use a nova função com offset
+    
+    // Atualizar a URL com o hash da seção
+    window.history.pushState(null, '', `#${id}`);
+    
+    console.log(
+      "%c[TableOfContents] URL atualizada com hash:",
+      "color: #4CAF50; font-weight: bold",
+      `#${id}`
+    );
   };
 
   if (tocItems.length === 0) {
