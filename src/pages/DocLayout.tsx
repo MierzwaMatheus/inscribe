@@ -11,8 +11,13 @@ interface DocLayoutProps {
 
 const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
   console.log(
-    `%c[DocLayout] Renderizando layout para: ${type}`,
+    `%c[DocLayout] Renderizando layout fixo para: ${type}`,
     "color: #4CAF50; font-weight: bold"
+  );
+  
+  console.log(
+    `%c[DocLayout] Layout fixo aplicado com sucesso`,
+    "color: #2196F3; font-weight: bold"
   );
 
   const docsMap =
@@ -35,7 +40,8 @@ const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
 
   return (
     <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 min-h-screen overflow-x-hidden">
-      <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 h-full">
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 h-full fixed w-full max-w-[calc(100vw-2rem)] lg:max-w-[calc(100vw-3rem)]">
+      
         {/* Container do Sidebar */}
         <div className="w-full lg:w-80 flex-shrink-0 order-2 lg:order-1">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 h-64 lg:h-[calc(100vh-3rem)] overflow-hidden transition-all duration-300 hover:shadow-xl backdrop-blur-sm">
@@ -60,6 +66,7 @@ const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
           </div>
         </div>
       </div>
+      <div className="h-[calc(100vh+3rem)]"></div>
     </div>
   );
 };
