@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ThemeToggle } from "./ThemeToggle";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Sidebar from "./Sidebar";
+import docsMapJson from "@/docsMap.json";
 
 const Header: React.FC = () => {
   const location = useLocation();
@@ -178,18 +179,51 @@ const Header: React.FC = () => {
       </header>
 
       {/* Menu mobile drawer */}
-      {isMobile && isMobileMenuOpen && (
+      {isMobile && (
         <>
           {/* Overlay */}
-          <div
-            className="fixed inset-0 bg-black/50 z-40"
-            onClick={closeMobileMenu}
-          />
+          {isMobileMenuOpen && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              onClick={closeMobileMenu}
+            />
+          )}
           
           {/* Drawer */}
-          <div className="fixed top-[65px] left-0 w-80 h-[calc(100vh-65px)] bg-white dark:bg-gray-900 shadow-xl z-40 overflow-y-auto">
-            <div className="p-4">
-              <Sidebar onNavigate={closeMobileMenu} />
+          <div
+            className={`fixed top-0 left-0 h-full w-80 bg-white dark:bg-gray-900 transform transition-transform duration-300 ease-in-out z-50 shadow-xl ${
+              isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
+          >
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Documentação
+              </h2>
+              <button
+                onClick={closeMobileMenu}
+                className="p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="h-[calc(100%-4rem)] overflow-y-auto bg-white dark:bg-gray-900">
+              <Sidebar 
+                docs={location.pathname.includes('/internal') ? docsMapJson.internal : docsMapJson.public} 
+                type={location.pathname.includes('/internal') ? 'internal' : 'public'} 
+              />
             </div>
           </div>
         </>
