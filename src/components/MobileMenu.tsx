@@ -33,10 +33,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ docs, type }) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
-        console.log(
-          "%c[MobileMenu] Fechando menu com ESC",
-          "color: #FF9800"
-        );
+        console.log("%c[MobileMenu] Fechando menu com ESC", "color: #FF9800");
         setIsOpen(false);
       }
     };
@@ -55,10 +52,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ docs, type }) => {
       );
     } else {
       document.body.style.overflow = "unset";
-      console.log(
-        "%c[MobileMenu] Scroll do body habilitado",
-        "color: #2196F3"
-      );
+      console.log("%c[MobileMenu] Scroll do body habilitado", "color: #2196F3");
     }
 
     return () => {
@@ -76,10 +70,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ docs, type }) => {
   };
 
   const closeMenu = () => {
-    console.log(
-      "%c[MobileMenu] Fechando menu",
-      "color: #FF9800"
-    );
+    console.log("%c[MobileMenu] Fechando menu", "color: #FF9800");
     setIsOpen(false);
   };
 

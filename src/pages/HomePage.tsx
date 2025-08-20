@@ -1,8 +1,14 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, FileText, Settings, Zap } from 'lucide-react';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { BookOpen, FileText, Settings, Zap } from "lucide-react";
 
 const HomePage: React.FC = () => {
   return (
@@ -12,7 +18,8 @@ const HomePage: React.FC = () => {
           Bem-vindo à Documentação InBot
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground mb-4 sm:mb-6">
-          Sistema de documentação interna desenvolvido para facilitar o acesso e organização do conhecimento da equipe.
+          Sistema de documentação interna desenvolvido para facilitar o acesso e
+          organização do conhecimento da equipe.
         </p>
       </div>
 
@@ -29,7 +36,11 @@ const HomePage: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-0">
-            <Button asChild variant="gradient" className="w-full text-sm sm:text-base py-2 sm:py-3">
+            <Button
+              asChild
+              variant="gradient"
+              className="w-full text-sm sm:text-base py-2 sm:py-3"
+            >
               <NavLink to="/public/1_Como Usar o Sistema/index">
                 Acessar
               </NavLink>
@@ -48,10 +59,12 @@ const HomePage: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-0">
-            <Button asChild variant="gradient" className="w-full text-sm sm:text-base py-2 sm:py-3">
-              <NavLink to="/internal/1_Introdução/bem-vindo">
-                Acessar
-              </NavLink>
+            <Button
+              asChild
+              variant="gradient"
+              className="w-full text-sm sm:text-base py-2 sm:py-3"
+            >
+              <NavLink to="/internal/1_Introdução/bem-vindo">Acessar</NavLink>
             </Button>
           </CardContent>
         </Card>
@@ -117,9 +130,11 @@ const HomePage: React.FC = () => {
       {/* Dica sobre navegação */}
       <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-muted/50 rounded-lg border-l-4 border-primary">
         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-          💡 <strong>Dica:</strong> Use o menu lateral para navegar pela documentação. 
+          💡 <strong>Dica:</strong> Use o menu lateral para navegar pela
+          documentação.
           <span className="block sm:inline mt-1 sm:mt-0">
-            Em dispositivos móveis, clique no ícone de menu no canto superior esquerdo.
+            Em dispositivos móveis, clique no ícone de menu no canto superior
+            esquerdo.
           </span>
         </p>
       </div>

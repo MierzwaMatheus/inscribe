@@ -2,7 +2,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
-import MobileMenu from "@/components/MobileMenu";
 import DocViewer from "./DocViewer";
 import docsMapJson from "@/docsMap.json";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -13,7 +12,7 @@ interface DocLayoutProps {
 
 const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
   const isMobile = useIsMobile();
-  
+
   console.log(
     `%c[DocLayout] Renderizando layout responsivo para: ${type}`,
     "color: #4CAF50; font-weight: bold",
@@ -45,12 +44,11 @@ const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
 
   return (
     <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 h-screen overflow-hidden">
-      {/* Menu Mobile */}
-      <MobileMenu docs={docsMap} type={type} />
-      
-      <div className={`flex gap-4 lg:gap-6 p-4 lg:p-6 h-full ${
-        isMobile ? 'flex-col' : 'flex-col lg:flex-row'
-      }`}>
+      <div
+        className={`flex gap-4 lg:gap-6 p-4 lg:p-6 h-full ${
+          isMobile ? "flex-col" : "flex-col lg:flex-row"
+        }`}
+      >
         {/* Container do Sidebar - Oculto em mobile */}
         {!isMobile && (
           <div className="w-full lg:w-80 flex-shrink-0 order-2 lg:order-1">
@@ -63,14 +61,18 @@ const DocLayout: React.FC<DocLayoutProps> = ({ type }) => {
         )}
 
         {/* Container do Conteúdo Principal */}
-        <div className={`flex-1 min-w-0 ${
-          isMobile ? 'order-1' : 'order-1 lg:order-2'
-        }`}>
-          <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl backdrop-blur-sm ${
-            isMobile 
-              ? 'h-[calc(100vh-8rem)] mt-16' // Espaço para o botão hambúrguer
-              : 'h-[calc(100vh-20rem)] lg:h-[calc(100vh-3rem)]'
-          }`}>
+        <div
+          className={`flex-1 min-w-0 ${
+            isMobile ? "order-1" : "order-1 lg:order-2"
+          }`}
+        >
+          <div
+            className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl backdrop-blur-sm ${
+              isMobile
+                ? "h-[calc(100vh-4rem)]" // Altura ajustada para mobile
+                : "h-[calc(100vh-20rem)] lg:h-[calc(100vh-3rem)]"
+            }`}
+          >
             <main className="h-full overflow-y-auto">
               <Routes>
                 <Route path="/*" element={<DocViewer type={type} />} />

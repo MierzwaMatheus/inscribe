@@ -223,7 +223,9 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
     return (
       <div className="p-4 sm:p-8 max-w-4xl mx-auto">
         <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 sm:p-6">
-          <h1 className="text-xl sm:text-2xl font-bold text-destructive mb-4">{title}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-destructive mb-4">
+            {title}
+          </h1>
           <p className="text-destructive mb-4 text-sm sm:text-base">{error}</p>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
             <a
@@ -249,28 +251,28 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
       <div className="flex flex-col xl:flex-row gap-2 sm:gap-4 xl:gap-8 p-2 sm:p-4 xl:p-6 min-h-full">
         {/* Conteúdo principal */}
         <div className="flex-1 min-w-0 order-2 xl:order-1 overflow-x-hidden">
-          <article className="p-3 sm:p-4 md:p-6 xl:p-8 w-full max-w-none">
+          <article className="p-4 sm:p-6 md:p-8 xl:p-10 w-full max-w-none">
             {/* Cabeçalho do documento */}
-            <header className="mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-gray-200 dark:border-gray-700 transition-colors">
-              <h1 className="text-2xl sm:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 transition-colors leading-tight">
+            <header className="mb-8 sm:mb-10 pb-6 sm:pb-8 border-b border-gray-200 dark:border-gray-700 transition-colors">
+              <h1 className="text-3xl sm:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-3 transition-colors leading-tight">
                 {title}
               </h1>
 
               {/* Metadados do frontmatter */}
               {(metadata.description || metadata.tags) && (
-                <div className="mt-3 sm:mt-4 space-y-2">
+                <div className="mt-4 sm:mt-6 space-y-3">
                   {metadata.description && (
-                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 transition-colors">
+                    <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 transition-colors leading-relaxed">
                       {metadata.description}
                     </p>
                   )}
 
                   {metadata.tags && Array.isArray(metadata.tags) && (
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       {metadata.tags.map((tag: string, index: number) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 text-xs sm:text-sm rounded-md transition-colors"
+                          className="px-3 py-2 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 text-sm sm:text-base rounded-lg transition-colors font-medium"
                         >
                           {tag}
                         </span>
@@ -281,8 +283,8 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
               )}
 
               {/* Breadcrumb */}
-              <div className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400 transition-colors">
-                <span className="break-all">
+              <div className="mt-4 sm:mt-6 text-sm sm:text-base text-gray-500 dark:text-gray-400 transition-colors">
+                <span className="break-all font-medium">
                   📍 /{type}/{docPath || "(raiz)"}
                 </span>
               </div>
@@ -290,18 +292,19 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 
             {/* Conteúdo do documento */}
             <div
-              className="markdown-body prose prose-sm sm:prose-base prose-slate max-w-none w-full overflow-x-auto
+              className="markdown-body prose prose-base sm:prose-lg prose-slate max-w-none w-full overflow-x-auto
                          prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-headings:scroll-mt-20
-                         prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
+                         prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:text-base sm:prose-p:text-lg
                          prose-strong:text-gray-900 dark:prose-strong:text-gray-100
-                         prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-50 dark:prose-code:bg-blue-900/30 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:break-all prose-code:text-xs sm:prose-code:text-sm
-                         prose-pre:bg-gray-50 dark:prose-pre:bg-gray-800 prose-pre:border dark:prose-pre:border-gray-700 prose-pre:overflow-x-auto prose-pre:max-w-full prose-pre:text-xs sm:prose-pre:text-sm
-                         prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400 prose-blockquote:text-sm sm:prose-blockquote:text-base
+                         prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-50 dark:prose-code:bg-blue-900/30 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:break-all prose-code:text-sm sm:prose-code:text-base
+                         prose-pre:bg-gray-50 dark:prose-pre:bg-gray-800 prose-pre:border dark:prose-pre:border-gray-700 prose-pre:overflow-x-auto prose-pre:max-w-full prose-pre:text-sm sm:prose-pre:text-base
+                         prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400 prose-blockquote:text-base sm:prose-blockquote:text-lg prose-blockquote:pl-6 prose-blockquote:py-3
                          prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-700 dark:hover:prose-a:text-blue-300 prose-a:break-words
-                         prose-table:text-gray-700 dark:prose-table:text-gray-300 prose-table:table-auto prose-table:w-full prose-table:overflow-x-auto prose-table:text-xs sm:prose-table:text-sm
-                         prose-th:text-gray-900 dark:prose-th:text-gray-100 prose-td:text-gray-700 dark:prose-td:text-gray-300
+                         prose-table:text-gray-700 dark:prose-table:text-gray-300 prose-table:table-auto prose-table:w-full prose-table:overflow-x-auto prose-table:text-sm sm:prose-table:text-base
+                         prose-th:text-gray-900 dark:prose-th:text-gray-100 prose-th:px-4 prose-th:py-3 prose-th:text-sm sm:prose-th:text-base prose-td:text-gray-700 dark:prose-td:text-gray-300 prose-td:px-4 prose-td:py-3 prose-td:text-sm sm:prose-td:text-base
                          prose-img:max-w-full prose-img:h-auto prose-img:rounded-lg
-                         prose-ul:space-y-1 prose-ol:space-y-1
+                         prose-ul:space-y-1 prose-ol:space-y-1 prose-ul:text-base sm:prose-ul:text-lg prose-ol:text-base sm:prose-ol:text-lg
+                         prose-li:text-base sm:prose-li:text-lg prose-li:leading-relaxed
                          break-words transition-colors"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
