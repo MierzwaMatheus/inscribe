@@ -37,8 +37,7 @@ Você escolhe os componentes que precisa para montar seu flow.
 Para entender melhor, use o criador visual do Facebook:  
 👉 [WhatsApp Flow Playground](https://developers.facebook.com/docs/whatsapp/flows/playground)
 
-![Editor Visual](image-12.png)
----
+## ![Editor Visual](image-12.png)
 
 ## 🛠️ Como usamos o Flow
 

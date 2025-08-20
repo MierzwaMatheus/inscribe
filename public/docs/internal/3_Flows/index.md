@@ -15,8 +15,9 @@ Aqui está a documentação completa sobre o uso de **Flows** no WhatsApp: como 
 
 ## 🗂️ Índice
 
-| Seção                     | Arquivo                              | Descrição                                                                      |
-| ------------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
-| 📖 Introdução & Conceitos | [`O que é Flows?`](flows)             | Explicação geral do que são Flows, regras, funcionamento e estrutura de uso.   |
+| Seção                     | Arquivo                     | Descrição                                                                      |
+| ------------------------- | --------------------------- | ------------------------------------------------------------------------------ |
+| 📖 Introdução & Conceitos | [`O que é Flows?`](flows)   | Explicação geral do que são Flows, regras, funcionamento e estrutura de uso.   |
 | 🧩 Componentes            | [`Componentes`](components) | Lista e detalhes dos componentes disponíveis (textos, inputs, dropdowns etc.). |
-| 🧪 Exemplos               | [`Exemplos`](exemplos)       | Exemplos reais de Flows em funcionamento com links para testar no WhatsApp.    |
+| 🧪 Exemplos               | [`Exemplos`](exemplos)      | Exemplos reais de Flows em funcionamento com links para testar no WhatsApp.    |
+| 🛠️ Como usamos            | [`Como usamos`](como-usamos) | Como implementamos Flows na nossa comunicação com os clientes.                |
