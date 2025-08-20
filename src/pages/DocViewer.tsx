@@ -221,20 +221,20 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 
   if (error) {
     return (
-      <div className="p-8 max-w-4xl mx-auto">
-        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6">
-          <h1 className="text-2xl font-bold text-destructive mb-4">{title}</h1>
-          <p className="text-destructive mb-4">{error}</p>
-          <div className="space-x-4">
+      <div className="p-4 sm:p-8 max-w-4xl mx-auto">
+        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 sm:p-6">
+          <h1 className="text-xl sm:text-2xl font-bold text-destructive mb-4">{title}</h1>
+          <p className="text-destructive mb-4 text-sm sm:text-base">{error}</p>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
             <a
               href="/"
-              className="text-primary hover:text-primary/80 underline"
+              className="text-primary hover:text-primary/80 underline text-sm sm:text-base"
             >
               ← Voltar para a página inicial
             </a>
             <a
               href="/public/1_Publicas/bem-vindo"
-              className="text-primary hover:text-primary/80 underline"
+              className="text-primary hover:text-primary/80 underline text-sm sm:text-base"
             >
               Ir para a documentação pública
             </a>
@@ -246,31 +246,31 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 
   return (
     <div className="w-full h-full overflow-y-auto">
-      <div className="flex flex-col xl:flex-row gap-4 xl:gap-8 p-4 xl:p-6 min-h-full">
+      <div className="flex flex-col xl:flex-row gap-2 sm:gap-4 xl:gap-8 p-2 sm:p-4 xl:p-6 min-h-full">
         {/* Conteúdo principal */}
         <div className="flex-1 min-w-0 order-2 xl:order-1 overflow-x-hidden">
-          <article className="p-4 md:p-6 xl:p-8 w-full max-w-none">
+          <article className="p-3 sm:p-4 md:p-6 xl:p-8 w-full max-w-none">
             {/* Cabeçalho do documento */}
-            <header className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700 transition-colors">
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+            <header className="mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-gray-200 dark:border-gray-700 transition-colors">
+              <h1 className="text-2xl sm:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 transition-colors leading-tight">
                 {title}
               </h1>
 
               {/* Metadados do frontmatter */}
               {(metadata.description || metadata.tags) && (
-                <div className="mt-4 space-y-2">
+                <div className="mt-3 sm:mt-4 space-y-2">
                   {metadata.description && (
-                    <p className="text-lg text-gray-600 dark:text-gray-300 transition-colors">
+                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 transition-colors">
                       {metadata.description}
                     </p>
                   )}
 
                   {metadata.tags && Array.isArray(metadata.tags) && (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {metadata.tags.map((tag: string, index: number) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 text-sm rounded-md transition-colors"
+                          className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 text-xs sm:text-sm rounded-md transition-colors"
                         >
                           {tag}
                         </span>
@@ -281,8 +281,8 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
               )}
 
               {/* Breadcrumb */}
-              <div className="mt-4 text-sm text-gray-500 dark:text-gray-400 transition-colors">
-                <span>
+              <div className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400 transition-colors">
+                <span className="break-all">
                   📍 /{type}/{docPath || "(raiz)"}
                 </span>
               </div>
@@ -290,17 +290,18 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
 
             {/* Conteúdo do documento */}
             <div
-              className="markdown-body prose prose-slate max-w-none w-full overflow-x-auto
-                         prose-headings:text-gray-900 dark:prose-headings:text-gray-100
-                         prose-p:text-gray-700 dark:prose-p:text-gray-300
+              className="markdown-body prose prose-sm sm:prose-base prose-slate max-w-none w-full overflow-x-auto
+                         prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-headings:scroll-mt-20
+                         prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
                          prose-strong:text-gray-900 dark:prose-strong:text-gray-100
-                         prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-50 dark:prose-code:bg-blue-900/30 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:break-all
-                         prose-pre:bg-gray-50 dark:prose-pre:bg-gray-800 prose-pre:border dark:prose-pre:border-gray-700 prose-pre:overflow-x-auto prose-pre:max-w-full
-                         prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400
-                         prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-700 dark:hover:prose-a:text-blue-300 prose-a:break-all
-                         prose-table:text-gray-700 dark:prose-table:text-gray-300 prose-table:table-auto prose-table:w-full prose-table:overflow-x-auto
+                         prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-50 dark:prose-code:bg-blue-900/30 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:break-all prose-code:text-xs sm:prose-code:text-sm
+                         prose-pre:bg-gray-50 dark:prose-pre:bg-gray-800 prose-pre:border dark:prose-pre:border-gray-700 prose-pre:overflow-x-auto prose-pre:max-w-full prose-pre:text-xs sm:prose-pre:text-sm
+                         prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400 prose-blockquote:border-l-blue-500 dark:prose-blockquote:border-l-blue-400 prose-blockquote:text-sm sm:prose-blockquote:text-base
+                         prose-a:text-blue-600 dark:prose-a:text-blue-400 hover:prose-a:text-blue-700 dark:hover:prose-a:text-blue-300 prose-a:break-words
+                         prose-table:text-gray-700 dark:prose-table:text-gray-300 prose-table:table-auto prose-table:w-full prose-table:overflow-x-auto prose-table:text-xs sm:prose-table:text-sm
                          prose-th:text-gray-900 dark:prose-th:text-gray-100 prose-td:text-gray-700 dark:prose-td:text-gray-300
-                         prose-img:max-w-full prose-img:h-auto
+                         prose-img:max-w-full prose-img:h-auto prose-img:rounded-lg
+                         prose-ul:space-y-1 prose-ol:space-y-1
                          break-words transition-colors"
               dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
@@ -308,8 +309,8 @@ const DocViewer: React.FC<DocViewerProps> = ({ type }) => {
         </div>
 
         {/* Tabela de conteúdos na lateral direita */}
-        <div className="w-full xl:w-80 flex-shrink-0 order-1 xl:order-2 p-4">
-          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 sticky top-4">
+        <div className="w-full xl:w-80 flex-shrink-0 order-1 xl:order-2 p-2 sm:p-4">
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 sm:p-4 sticky top-2 sm:top-4">
             {htmlContent && <TableOfContents htmlContent={htmlContent} />}
           </div>
         </div>
